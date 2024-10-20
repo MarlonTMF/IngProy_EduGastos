@@ -1,8 +1,13 @@
 class Ingresos {
     constructor() {
-      // Sin implementación aún
+      this.ingresos = [];
+    }
+    registrarIngreso(ingreso) {
+      this.ingresos.push(ingreso);
+    }
+    obtenerIngresos() {
+      return this.ingresos;
     }
   }
   
-  export default Ingresos;
-  
+export default Ingresos;
