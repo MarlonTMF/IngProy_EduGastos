@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xml:lang="es">
+  <head>
+    <title>Ingresos</title>
+  </head>
+  <body>
+    <h1>Registro de Ingresos</h1>
+    <form id="ingresos-form">
+      <label for="fecha">fecha:</label>
+      <input type="date" id="fecha" />
+      <label for="monto">Monto:</label>
+      <input type="number" id="monto" />
+      <label for="descripcion">Descripcion:</label>
+      <input type="text" id="descripcion" />
+
+      <input
+        type="submit"
+        value="Registrar ingreso"
+        id="registrar-ingreso-button"
+      />
+    </form>
+    <div id="ingresos"></div>
+
+    <script type="module" src="./src/presenter.js"></script>
+  </body>
+</html>
