@@ -9,4 +9,4 @@ class Gastos {
     return this.gastos[0];
   }
 }
-export default Gastos;
+//export default Gastos;

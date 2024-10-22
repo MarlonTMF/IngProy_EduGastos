@@ -1,26 +1,18 @@
 <!DOCTYPE html>
-<html xml:lang="es">
+<html lang="es">
   <head>
-    <title>Gastos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduGastos - Inicio</title>
   </head>
   <body>
-    <h1>Registro de gasto</h1>
-    <form id="gastos-form">
-      <label for="fecha">fecha:</label>
-      <input type="date" id="fecha" />
-      <label for="monto">Monto:</label>
-      <input type="number" id="monto" />
-      <label for="descripcion">Descripcion:</label>
-      <input type="text" id="descripcion" />
+    <h1>Bienvenido a EduGastos</h1>
+    <p>Gestión de tu mesada de manera fácil y organizada.</p>
 
-      <input
-        type="submit"
-        value="Registrar gasto"
-        id="registrar-gasto-button"
-      />
-    </form>
-    <div id="gastos-div"></div>
-
-    <script type="module" src="./src/presenter.js"></script>
+    <!-- Botón para redireccionar a RegistrarGasto.html -->
+    <a href="./src/Plantillas/RegistrarGasto.html">
+      <button>Registrar un gasto</button>
+    </a>
+    
   </body>
 </html>
