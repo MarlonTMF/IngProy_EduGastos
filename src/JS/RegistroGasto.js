@@ -1,3 +1,4 @@
+
 class Gastos {
   constructor() {
     this.gastos = [];
@@ -15,5 +16,13 @@ class Gastos {
   }
 }
 
-export { Gastos };
+function validarCampos(fecha) {
+  let errores = [];
+  if (!fecha) {
+    errores.push("El campo de fecha es obligatorio.");
+  }
+  return errores;
+}
+export { Gastos, validarCampos };
+
 

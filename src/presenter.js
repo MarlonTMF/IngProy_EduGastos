@@ -1,4 +1,4 @@
-import {Gastos} from "./JS/RegistroGasto.js"; 
+import {Gastos, validarCampos} from "./JS/RegistroGasto.js"; 
 
 // Lógica para registrar y mostrar gastos
 const formulario = document.getElementById('gastos-form');
@@ -12,7 +12,15 @@ formulario.addEventListener('submit', (event) => {
   const fecha = document.getElementById('fecha').value;
   const monto = document.getElementById('monto').value;
   const descripcion = document.getElementById('descripcion').value || ""; 
-  
+  const errores = validarCampos(fecha);
+  const errorFechaDiv = document.getElementById('error-fecha');
+
+  errorFechaDiv.textContent = "";
+
+  if (errores.length > 0) {
+    errorFechaDiv.textContent = errores[0]; 
+     return;
+   }
   // Registrar gasto
   const nuevoGasto = { fecha, monto, descripcion };
   gastos.registrarGasto(nuevoGasto);

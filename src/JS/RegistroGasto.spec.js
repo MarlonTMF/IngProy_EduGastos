@@ -1,4 +1,4 @@
-import {Gastos} from "./RegistroGasto.js";
+import {Gastos, validarCampos} from "./RegistroGasto.js";
 describe("Gastos", () => {
   it("registrar un gasto", () => {
     const gastos = new Gastos();
@@ -35,4 +35,14 @@ describe("Gastos", () => {
     let gastoRegistrado = gastos.obtenerGastos();
     expect(gastoRegistrado).toBeUndefined();  
   });
+  it("debería retornar un error si la fecha es una cadena vacía", () => {
+    const errores = validarCampos(""); 
+    expect(errores).toEqual(["El campo de fecha es obligatorio."]);
+  });
+  it("no debería retornar ningún error si la fecha es válida", () => {
+    const errores = validarCampos("2023-10-20");
+    expect(errores).toEqual([]);  // Debe devolver un array vacío
+  });
+  
+
 });
