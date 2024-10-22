@@ -36,5 +36,11 @@ describe("Registro de gasto", () => {
       .and("contain", "100")
       .and("contain", "Sin descripción"); 
   });
+  it("No se debe permitir el registrar un gasto si faltan campos obligatorios (fecha,monto)", () => {
+    cy.visit("/src/Plantillas/RegistrarGasto.html");
+    cy.get("#descripcion").type("Cine");
+    cy.get("#registrar-gasto-button").click();
+    cy.get("#gastos-div").should("not.contain", "Cine");
+  });
 });
 
