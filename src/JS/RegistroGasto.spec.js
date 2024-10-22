@@ -1,37 +1,30 @@
-import Gastos from "./gastos.js";
-
+import Gastos from "./RegistroGasto.js";
 describe("Gastos", () => {
   it("registrar un gasto", () => {
-    //Given -- arrange
     const gastos = new Gastos();
     const registroGasto = {
       fecha: "2024-10-12",
-      monto: 45,
+      monto: 200,
       descripcion: "compra de libros",
     };
 
-    //When -act
     gastos.registrarGasto(registroGasto);
 
-    //Then --assert
     let gastoRegistrado = gastos.obtenerGastos();
     expect(gastoRegistrado).toEqual(registroGasto);
   });
 
-  it("registrar un gasto en pasajes", () => {
-    //Given -- arrange
+  it("registrar un gasto sin descripción", () => {
+
     const gastos = new Gastos();
     const registroGasto = {
-      fecha: "2024-08-12",
-      monto: 20,
-      descripcion: "pasajes",
+      fecha: "2024-10-12",
+      monto: 50,
+      descripcion: "", // Descripción vacía
     };
 
-    //When -act
     gastos.registrarGasto(registroGasto);
-
-    //Then --assert
     let gastoRegistrado = gastos.obtenerGastos();
-    expect(gastoRegistrado).toEqual(registroGasto);
+    expect(gastoRegistrado.descripcion).toEqual("");
   });
 });

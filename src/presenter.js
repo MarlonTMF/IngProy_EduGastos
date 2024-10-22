@@ -1,31 +1,22 @@
-//import sumar from "./sumador";
+import Gastos  from "./JS/RegistroGasto.js"; 
 
-const fecha = document.querySelector("#fecha");
-const monto = document.querySelector("#monto");
-const descripcion = document.querySelector("#descripcion");
+// Lógica para registrar y mostrar gastos
+const formulario = document.getElementById('gastos-form');
+const gastosDiv = document.getElementById('gastos-div');
+const gastos = new Gastos();
 
-const form = document.querySelector("#gastos-form");
-const gastosdiv = document.querySelector("#gastos-div");
-
-form.addEventListener("submit", (event) => {
+formulario.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const fechaValue = fecha.value;
-  const montoValue = Number.parseInt(monto.value);
-  const descripcionValue = descripcion.value;
+  // Obtener valores del formulario
+  const fecha = document.getElementById('fecha').value;
+  const monto = document.getElementById('monto').value;
+  const descripcion = document.getElementById('descripcion').value || ""; 
 
-  //const gastos = new Gastos();
-  //gastos.registrargasto(fecha, monto, descripcion);
-  //const gastoregistrado = gastos.obtenerGastos(();
+  // Registrar gasto
+  const nuevoGasto = { fecha, monto, descripcion };
+  gastos.registrarGasto(nuevoGasto);
 
-  gastosdiv.innerHTML =
-    "<div>" +
-    fechaValue +
-    "</div>" +
-    "<div>" +
-    montoValue +
-    "</div>" +
-    "<div>" +
-    descripcionValue +
-    "</div>";
+  // Mostrar el gasto en la página
+  gastosDiv.innerHTML += `<p>Fecha: ${fecha} - Monto: ${monto} - Descripción: ${descripcion || 'Sin descripción'}</p>`;
 });
