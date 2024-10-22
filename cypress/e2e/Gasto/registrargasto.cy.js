@@ -42,5 +42,11 @@ describe("Registro de gasto", () => {
     cy.get("#registrar-gasto-button").click();
     cy.get("#gastos-div").should("not.contain", "Cine");
   });
+  it.skip("Debe mostrar mensaje de error si falta la fecha", () => {
+    cy.visit("/src/Plantillas/RegistrarGasto.html");
+    cy.get("#monto").type(55);
+    cy.get("#registrar-gasto-button").click();
+    cy.get("#error-fecha").should("contain", "El campo de fecha es obligatorio.");
+  });
 });
 
