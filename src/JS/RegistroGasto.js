@@ -4,6 +4,9 @@ class Gastos {
   }
 
   registrarGasto(gasto) {
+    if (!gasto.fecha || !gasto.monto) {
+      return;  
+    }
     this.gastos.push(gasto);
   }
 
