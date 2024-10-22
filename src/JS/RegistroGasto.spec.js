@@ -27,4 +27,12 @@ describe("Gastos", () => {
     let gastoRegistrado = gastos.obtenerGastos();
     expect(gastoRegistrado.descripcion).toEqual("");
   });
+  it("no permite registrar un gasto sin fecha, ni monto", () => {
+    const gastos = new Gastos();
+    const registroGasto = { descripcion: "compra de libros" };
+
+    gastos.registrarGasto(registroGasto);
+    let gastoRegistrado = gastos.obtenerGastos();
+    expect(gastoRegistrado).toBeUndefined();  
+  });
 });
