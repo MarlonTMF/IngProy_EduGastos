@@ -1,4 +1,4 @@
-import Gastos from "./RegistroGasto.js";
+import {Gastos} from "./RegistroGasto.js";
 describe("Gastos", () => {
   it("registrar un gasto", () => {
     const gastos = new Gastos();
@@ -27,7 +27,7 @@ describe("Gastos", () => {
     let gastoRegistrado = gastos.obtenerGastos();
     expect(gastoRegistrado.descripcion).toEqual("");
   });
-  it("no permite registrar un gasto sin fecha, ni monto", () => {
+  it("no permite registrar un gasto sin fecha", () => {
     const gastos = new Gastos();
     const registroGasto = { descripcion: "compra de libros" };
 

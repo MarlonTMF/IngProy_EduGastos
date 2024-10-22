@@ -15,4 +15,5 @@ class Gastos {
   }
 }
 
-export default Gastos;
+export { Gastos };
+
