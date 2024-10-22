@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Budget</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h2>Monthly Budgets</h2>
+        <div class="budget-item">
+            <div class="budget-category">
+                <p>Food</p>
+                <p>Budget: $300 | Spent: $200</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 67%;"></div>
+            </div>
+        </div>
+
+        <div class="budget-item">
+            <div class="budget-category">
+                <p>Transportation</p>
+                <p>Budget: $150 | Spent: $100</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 67%;"></div>
+            </div>
+        </div>
+
+        <!-- Botón para agregar una nueva categoría -->
+        <button id="addCategoryBtn">Add New Category</button>
+    </div>
+
+    <!-- Ventana emergente para añadir nueva categoría -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Add New Category</h3>
+            <label for="categoryName">Category Name:</label>
+            <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
+            <label for="categoryBudget">Budget:</label>
+            <input type="number" id="categoryBudget" name="categoryBudget" placeholder="Enter budget amount">
+            <button id="saveCategoryBtn">Save</button>
+        </div>
+    </div>
+
+    <script type="module" src="../JS/presenterPresM.js"></script>
+</body>
+</html>
