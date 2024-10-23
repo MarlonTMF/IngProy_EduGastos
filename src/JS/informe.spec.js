@@ -7,4 +7,19 @@ describe("Informe de Gastos", () => {
     const gastosRegistrados = gastos.obtenerGastos();
     expect(gastosRegistrados).toEqual([]);
   });
+
+  it("debería mostrar un informe con un gasto registrado", () => {
+
+    const gastos = new Gastos();
+    const registroGasto = {
+      fecha: "2024-10-12",
+      monto: 45,
+      descripcion: "compra de libros",
+    };
+    gastos.registrarGasto(registroGasto);
+
+    const gastosRegistrados = gastos.obtenerGastos();
+
+    expect(gastosRegistrados).toEqual([registroGasto]);
+  });
 });

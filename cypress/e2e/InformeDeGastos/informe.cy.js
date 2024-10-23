@@ -10,4 +10,31 @@ describe("Informe de Gastos", () => {
           .should("be.visible")
           .and("contain", "No hay gastos registrados para mostrar.");
       });
+
+      it.skip("muestra todos los gastos registrados en el informe", () => {
+       
+        cy.visit("/src/Plantillas/RegistroDeIngresos.html");
+        cy.get("#fecha").type("2024-10-14");
+        cy.get("#monto").type(55);
+        cy.get("#descripcion").type("Fotocopias varias");
+        cy.get("#registrar-gasto-button").click();
+    
+        cy.get("#fecha").type("2023-12-24");
+        cy.get("#monto").type(155);
+        cy.get("#descripcion").type("Ropa");
+        cy.get("#registrar-gasto-button").click();
+    
+        cy.visit("/src/Plantillas/InformeGastos.html");
+        cy.get("#generar-informe-button").click();
+    
+        cy.get("#informe-tbody")
+          .should("contain", "2024-10-14")
+          .and("contain", "55")
+          .and("contain", "Fotocopias varias");
+    
+        cy.get("#informe-tbody")
+          .should("contain", "2023-12-24")
+          .and("contain", "155")
+          .and("contain", "Ropa");
+      });
     });
