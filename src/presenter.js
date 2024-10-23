@@ -1,29 +1,18 @@
-//import Gastos from "./gastos";
-import Ingresos from "./JS/ingresos";
+import Gastos from "./gastos";
 
-const fechaGasto = document.querySelector("#fecha-gasto");
-const montoGasto = document.querySelector("#monto-gasto");
-const descripcionGasto = document.querySelector("#descripcion-gasto");
+const fecha = document.querySelector("#fecha");
+const monto = document.querySelector("#monto");
+const descripcion = document.querySelector("#descripcion");
 
-const fechaIngreso = document.querySelector("#fecha-ingreso");
-const montoIngreso = document.querySelector("#monto-ingreso");
-const descripcionIngreso = document.querySelector("#descripcion-ingreso");
-
-const formGasto = document.querySelector("#gastos-form");
-const formIngreso = document.querySelector("#ingresos-form");
-
-const gastosDiv = document.querySelector("#gastos-div");
-const ingresosDiv = document.querySelector("#ingresos-div");
-
+const form = document.querySelector("#gastos-form");
+const gastosdiv = document.querySelector("#gastos-div");
 const gastos = new Gastos();
-const ingresos = new Ingresos();
 
-// Manejar el formulario de gastos
-formGasto.addEventListener("submit", (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const fechaValue = fechaGasto.value;
-  const montoValue = Number.parseInt(montoGasto.value);
-  const descripcionValue = descripcionGasto.value;
+  const fechaValue = fecha.value;
+  const montoValue = Number.parseInt(monto.value);
+  const descripcionValue = descripcion.value;
   
   const gasto = {
     fecha: fechaValue,
@@ -33,39 +22,13 @@ formGasto.addEventListener("submit", (event) => {
   gastos.registrarGasto(gasto);
   
   const gastosRegistrados = gastos.obtenerGastos();
-  console.log("gastos: " + gastosRegistrados);
-  console.log("gastos registrados: " + gastosRegistrados);
+  console.log("gastos: "+ gastosRegistrados);
+  console.log("gastos registrados: "+gastosRegistrados);
 
-  gastosDiv.innerHTML = "<ul>";  
+  gastosdiv.innerHTML = "<ul>";  
   gastosRegistrados.forEach((gastoRegistrado) => {
-    gastosDiv.innerHTML += 
-       "<li>" + gastoRegistrado.fecha + "  " + gastoRegistrado.monto + "  " + gastoRegistrado.descripcion + "</li>";
-  });
-  gastosDiv.innerHTML += "</ul>";
-});
-
-// Manejar el formulario de ingresos
-formIngreso.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const fechaValue = fechaIngreso.value;
-  const montoValue = Number.parseInt(montoIngreso.value);
-  const descripcionValue = descripcionIngreso.value;
-  
-  const ingreso = {
-    fecha: fechaValue,
-    monto: montoValue,
-    descripcion: descripcionValue,
-  };
-  ingresos.registrarIngreso(ingreso);
-  
-  const ingresosRegistrados = ingresos.obtenerIngresos();
-  console.log("ingresos: " + ingresosRegistrados);
-  console.log("ingresos registrados: " + ingresosRegistrados);
-
-  ingresosDiv.innerHTML = "<ul>";  
-  ingresosRegistrados.forEach((ingresoRegistrado) => {
-    ingresosDiv.innerHTML += 
-       "<li>" + ingresoRegistrado.fecha + "  " + ingresoRegistrado.monto + "  " + ingresoRegistrado.descripcion + "</li>";
-  });
-  ingresosDiv.innerHTML += "</ul>";
+    gastosdiv.innerHTML+= 
+       "<li>"+gastoRegistrado.fecha+"  "+gastoRegistrado.monto+"  "+gastoRegistrado.descripcion+"</li>";
+    });
+  gastosdiv.innerHTML+= "</ul>";
 });

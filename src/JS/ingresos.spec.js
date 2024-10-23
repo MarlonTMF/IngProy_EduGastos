@@ -1,4 +1,4 @@
-import Ingresos from "./ingresos";
+import Ingresos from "./JS/ingresos";
 
 describe("Ingresos", () => {
     it("Registrar un ingreso", () => {
