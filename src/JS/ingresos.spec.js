@@ -14,4 +14,8 @@ describe("Ingresos", () => {
         let ingresoRegistrado = ingresos.obtenerIngresos();
         expect(ingresoRegistrado).toEqual([registroIngreso]);
     })
+    
+
+   
+
 });
