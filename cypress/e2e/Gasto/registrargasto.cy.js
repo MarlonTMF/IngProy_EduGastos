@@ -58,6 +58,12 @@ describe("Registro de gasto", () => {
     cy.get("#registrar-gasto-button").click();
     cy.get("#error-fecha").should("contain", "El campo de fecha es obligatorio.");
   });
+  it("Debe mostrar mensaje de error si falta el monto", () => {
+    cy.visit("/src/Plantillas/RegistrarGasto.html");
+    cy.get("#fecha").type("2024-10-23");
+    cy.get("#registrar-gasto-button").click();
+    cy.get("#error-monto").should("contain", "El campo de monto es obligatorio.");
+  });
 
 });
 
