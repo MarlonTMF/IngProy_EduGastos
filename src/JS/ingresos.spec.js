@@ -1,4 +1,4 @@
-import Ingresos from "./JS/ingresos";
+import Ingresos from "./ingresos";
 
 describe("Ingresos", () => {
     it("Registrar un ingreso", () => {
@@ -15,7 +15,20 @@ describe("Ingresos", () => {
         expect(ingresoRegistrado).toEqual([registroIngreso]);
     })
     
+    it("Registrar un ingreso de salario", () => {
 
+        const ingresos = new Ingresos();
+        const registroIngreso = {
+          fecha: "2024-10-22",
+          monto: 1000,
+          descripcion: "salario mensual",
+        };
+    
+        ingresos.registrarIngreso(registroIngreso);
+    
+        let ingresoRegistrado = ingresos.obtenerIngresos();
+        expect(ingresoRegistrado).toEqual([registroIngreso]);
+      })
    
 
 });
