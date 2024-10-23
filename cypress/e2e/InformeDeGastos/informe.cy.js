@@ -1,9 +1,9 @@
 describe("Informe de Gastos", () => {
-    it.skip("muestra un mensaje cuando no hay gastos registrados", () => {
+    it("muestra un mensaje cuando no hay gastos registrados", () => {
     
         localStorage.setItem("gastos", JSON.stringify([])); 
     
-        cy.visit("/src/Plantillas/InformeGastos.html");
+        cy.visit("http://localhost:1234/src/Plantillas/InformeGastos.html");
         cy.get("#generar-informe-button").click();
     
         cy.get("#error-div")
