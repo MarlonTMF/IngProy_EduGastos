@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xml:lang="es">
+  <head>
+    <title>Informe de Gastos</title>
+  </head>
+  <body>
+    <h1>Generar Informe de Gastos</h1>
+
+    <button id="generar-informe-button">Generar Informe</button>
+
+    <div id="informe-div">
+      <h2>Informe del Último Mes</h2>
+      <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody id="informe-tbody">
+        </tbody>
+      </table>
+    </div>
+
+    <div id="error-div" style="color: red; display: none;">
+      Alguno de los gastos no se puede incluir en el informe.
+    </div>
+
+    <script type="module" src="../JS/informe.js"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import Gastos from "./gastos";
+import Gastos from "./gastos.js";
 
 const fecha = document.querySelector("#fecha");
 const monto = document.querySelector("#monto");
@@ -7,6 +7,24 @@ const descripcion = document.querySelector("#descripcion");
 const form = document.querySelector("#gastos-form");
 const gastosdiv = document.querySelector("#gastos-div");
 const gastos = new Gastos();
+
+const cargarGastos = () => {
+  const gastosGuardados = JSON.parse(localStorage.getItem("gastos")) || [];
+  console.log("Gastos cargados desde localStorage:", gastosGuardados);
+  gastosGuardados.forEach(gasto => gastos.registrarGasto(gasto));
+  mostrarGastos(gastosGuardados);
+};
+
+const mostrarGastos = (gastosRegistrados) => {
+  gastosdiv.innerHTML = "<ul>";
+  gastosRegistrados.forEach((gastoRegistrado) => {
+    gastosdiv.innerHTML += 
+       `<li>${gastoRegistrado.fecha} ${gastoRegistrado.monto} ${gastoRegistrado.descripcion}</li>`;
+  });
+  gastosdiv.innerHTML += "</ul>";
+};
+
+cargarGastos();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -20,15 +38,10 @@ form.addEventListener("submit", (event) => {
     descripcion: descripcionValue,
   };
   gastos.registrarGasto(gasto);
-  
-  const gastosRegistrados = gastos.obtenerGastos();
-  console.log("gastos: "+ gastosRegistrados);
-  console.log("gastos registrados: "+gastosRegistrados);
 
-  gastosdiv.innerHTML = "<ul>";  
-  gastosRegistrados.forEach((gastoRegistrado) => {
-    gastosdiv.innerHTML+= 
-       "<li>"+gastoRegistrado.fecha+"  "+gastoRegistrado.monto+"  "+gastoRegistrado.descripcion+"</li>";
-    });
-  gastosdiv.innerHTML+= "</ul>";
+  localStorage.setItem("gastos", JSON.stringify(gastos.obtenerGastos()));
+  console.log("Gastos guardados en localStorage:", gastos.obtenerGastos());
+
+  const gastosRegistrados = gastos.obtenerGastos();
+  mostrarGastos(gastosRegistrados);
 });
