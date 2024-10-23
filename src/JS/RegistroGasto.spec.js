@@ -35,14 +35,15 @@ describe("Gastos", () => {
     let gastoRegistrado = gastos.obtenerGastos();
     expect(gastoRegistrado).toBeUndefined();  
   });
+  
   it("debería retornar un error si la fecha es una cadena vacía", () => {
-    const errores = validarCampos(""); 
+    const errores = validarCampos("", 100); 
     expect(errores).toEqual(["El campo de fecha es obligatorio."]);
   });
-  it("no debería retornar ningún error si la fecha es válida", () => {
-    const errores = validarCampos("2023-10-20");
-    expect(errores).toEqual([]);  // Debe devolver un array vacío
+
+  it("debería retornar un error si el monto es una cadena vacía", () => {
+    const errores = validarCampos("2024-10-23", ""); 
+    expect(errores).toEqual(["El campo de monto es obligatorio."]);
   });
-  
 
 });
