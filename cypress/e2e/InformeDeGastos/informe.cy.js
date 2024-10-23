@@ -11,9 +11,9 @@ describe("Informe de Gastos", () => {
           .and("contain", "No hay gastos registrados para mostrar.");
       });
 
-      it.skip("muestra todos los gastos registrados en el informe", () => {
-       
-        cy.visit("/src/Plantillas/RegistroDeIngresos.html");
+      it("muestra todos los gastos registrados en el informe", () => {
+    
+        cy.visit("/src/Plantillas/RegistroDeGastos.html");
         cy.get("#fecha").type("2024-10-14");
         cy.get("#monto").type(55);
         cy.get("#descripcion").type("Fotocopias varias");
@@ -37,4 +37,5 @@ describe("Informe de Gastos", () => {
           .and("contain", "155")
           .and("contain", "Ropa");
       });
+    
     });
