@@ -1,47 +1,39 @@
-import Gastos from "./gastos.js";
+import {Gastos, validarCampos} from "./JS/RegistroGasto.js"; 
 
-const fecha = document.querySelector("#fecha");
-const monto = document.querySelector("#monto");
-const descripcion = document.querySelector("#descripcion");
-
-const form = document.querySelector("#gastos-form");
-const gastosdiv = document.querySelector("#gastos-div");
+// Lógica para registrar y mostrar gastos
+const formulario = document.getElementById('gastos-form');
+const gastosDiv = document.getElementById('gastos-div');
 const gastos = new Gastos();
 
-const cargarGastos = () => {
-  const gastosGuardados = JSON.parse(localStorage.getItem("gastos")) || [];
-  console.log("Gastos cargados desde localStorage:", gastosGuardados);
-  gastosGuardados.forEach(gasto => gastos.registrarGasto(gasto));
-  mostrarGastos(gastosGuardados);
-};
-
-const mostrarGastos = (gastosRegistrados) => {
-  gastosdiv.innerHTML = "<ul>";
-  gastosRegistrados.forEach((gastoRegistrado) => {
-    gastosdiv.innerHTML += 
-       `<li>${gastoRegistrado.fecha} ${gastoRegistrado.monto} ${gastoRegistrado.descripcion}</li>`;
-  });
-  gastosdiv.innerHTML += "</ul>";
-};
-
-cargarGastos();
-
-form.addEventListener("submit", (event) => {
+formulario.addEventListener('submit', (event) => {
   event.preventDefault();
-  const fechaValue = fecha.value;
-  const montoValue = Number.parseInt(monto.value);
-  const descripcionValue = descripcion.value;
-  
-  const gasto = {
-    fecha: fechaValue,
-    monto: montoValue,
-    descripcion: descripcionValue,
-  };
-  gastos.registrarGasto(gasto);
 
-  localStorage.setItem("gastos", JSON.stringify(gastos.obtenerGastos()));
-  console.log("Gastos guardados en localStorage:", gastos.obtenerGastos());
+  // Obtener valores del formulario
+  const fecha = document.getElementById('fecha').value;
+  const monto = document.getElementById('monto').value;
+  const descripcion = document.getElementById('descripcion').value || ""; 
+  const errores = validarCampos(fecha, monto);
+  const errorFechaDiv = document.getElementById('error-fecha');
+  const errorMontoDiv = document.getElementById('error-monto');
 
-  const gastosRegistrados = gastos.obtenerGastos();
-  mostrarGastos(gastosRegistrados);
+  errorFechaDiv.textContent = "";
+  errorMontoDiv.textContent = "";
+
+  if (errores.length > 0) {
+    errores.forEach(error => {
+      if (error.includes("fecha")) {
+        errorFechaDiv.textContent = error; 
+      }
+      if (error.includes("monto")) {
+        errorMontoDiv.textContent = error; 
+      }
+    });
+    return;  // Detener si hay errores
+  }
+  // Registrar gasto
+  const nuevoGasto = { fecha, monto, descripcion };
+  gastos.registrarGasto(nuevoGasto);
+
+  // Mostrar el gasto en la página
+  gastosDiv.innerHTML += `<p>Fecha: ${fecha} - Monto: ${monto} - Descripción: ${descripcion || 'Sin descripción'}</p>`;
 });
