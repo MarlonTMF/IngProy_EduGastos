@@ -1,5 +1,16 @@
 import Gastos from "./gastos.js";
 
+beforeEach(() => {
+  // Mock de localStorage
+  global.localStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+  };
+
+  // Simulación de un estado inicial vacío de localStorage
+  localStorage.getItem.mockReturnValueOnce(null);
+});
+
 describe("Gastos", () => {
   it("registrar un gasto", () => {
     //Given -- arrange
