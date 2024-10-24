@@ -8,12 +8,8 @@ const form = document.querySelector("#gastos-form");
 const gastosdiv = document.querySelector("#gastos-div");
 const gastos = new Gastos();
 
-const cargarGastos = () => {
-  const gastosGuardados = JSON.parse(localStorage.getItem("gastos")) || [];
-  console.log("Gastos cargados desde localStorage:", gastosGuardados);
-  gastosGuardados.forEach(gasto => gastos.registrarGasto(gasto));
-  mostrarGastos(gastosGuardados);
-};
+// Array global para almacenar los gastos
+window.gastosArray = window.gastosArray || [];
 
 const mostrarGastos = (gastosRegistrados) => {
   gastosdiv.innerHTML = "<ul>";
@@ -23,8 +19,6 @@ const mostrarGastos = (gastosRegistrados) => {
   });
   gastosdiv.innerHTML += "</ul>";
 };
-
-cargarGastos();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -39,9 +33,9 @@ form.addEventListener("submit", (event) => {
   };
   gastos.registrarGasto(gasto);
 
-  localStorage.setItem("gastos", JSON.stringify(gastos.obtenerGastos()));
-  console.log("Gastos guardados en localStorage:", gastos.obtenerGastos());
+  // Guardar en el array global
+  window.gastosArray.push(gasto);
+  console.log("Gastos guardados en el array global:", window.gastosArray);
 
-  const gastosRegistrados = gastos.obtenerGastos();
-  mostrarGastos(gastosRegistrados);
+  mostrarGastos(window.gastosArray);
 });
