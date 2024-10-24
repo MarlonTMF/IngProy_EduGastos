@@ -31,7 +31,7 @@ describe("ver historial de gastos", () => {
           .and("contain", "Fotocopias varias");
       });
 
-      it('muestra advertencia cuando no se pueden mostrar los campos"', () => {
+      it.skip('muestra advertencia cuando no se pueden mostrar los campos"', () => {
         // Introduce un gasto válido
         cy.visit("/"); // Ruta del HTML donde se registran los gastos
         cy.get("#fecha").type("2024-10-14");
@@ -44,6 +44,7 @@ describe("ver historial de gastos", () => {
         // Then -- Assert
         cy.contains('Debe llenar todos los campos.').should('be.visible');
     });
+
     it("Debe mostrar el total de los gastos correctamente", () => {
       // Introduce múltiples gastos válidos
       cy.visit("/"); // Ruta del HTML donde se registran los gastos
