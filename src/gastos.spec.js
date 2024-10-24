@@ -7,7 +7,7 @@ beforeEach(() => {
     setItem: jest.fn(),
   };
 
-  // Simulación de un estado inicial vacío de localStorage
+  // Simulación de un estado inicial vacío de localStorage xddd
   localStorage.getItem.mockReturnValueOnce(null);
 });
 
