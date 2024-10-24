@@ -1,6 +1,6 @@
 describe("Informe de Gastos", () => {
     it("muestra un mensaje cuando no hay gastos registrados", () => {
-    
+    //gfwserg
         localStorage.setItem("gastos", JSON.stringify([])); 
     
         cy.visit("http://localhost:1234/src/Plantillas/InformeGastos.html");
