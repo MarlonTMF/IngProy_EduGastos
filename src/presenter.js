@@ -6,6 +6,12 @@ const descripcion = document.querySelector("#descripcion");
 
 const form = document.querySelector("#gastos-form");
 const gastosdiv = document.querySelector("#gastos-div");
+
+const advertencia = document.createElement("p");
+advertencia.style.color = "red";
+form.appendChild(advertencia);
+advertencia.style.display = "none"; 
+
 const gastos = new Gastos();
 
 form.addEventListener("submit", (event) => {
@@ -13,6 +19,15 @@ form.addEventListener("submit", (event) => {
   const fechaValue = fecha.value;
   const montoValue = Number.parseInt(monto.value);
   const descripcionValue = descripcion.value;
+  
+   // Verificar si todos los campos están llenos
+   if (!fechaValue || isNaN(montoValue) || !descripcionValue) {
+    advertencia.textContent = "Debe llenar todos los campos.";
+    advertencia.style.display = "block";
+    return;
+  } else {
+    advertencia.style.display = "none";  // Ocultar advertencia si está todo correcto
+  }
   
   const gasto = {
     fecha: fechaValue,

@@ -28,4 +28,6 @@ describe("Gastos", () => {
         let gastoRegistrado = gastos.obtenerGastos();
         expect(gastoRegistrado).toEqual([registroGasto]);
       });
+
+
 });
