@@ -1,20 +1,18 @@
-import Gastos from "../gastos";
+import Gastos from "../gastos.js";
 
-// Simula obtener los gastos previamente registrados (puedes modificar esta parte para integrarlo con almacenamiento real, como localStorage o una base de datos).
-const gastos = new Gastos();  // En una aplicación real, puedes cargar los gastos aquí desde un almacenamiento persistente.
+document.addEventListener("DOMContentLoaded", () => {
+  const gastos = new Gastos();
+  const historialDiv = document.getElementById("historial-gastos-div");
+  const totalGastosSpan = document.getElementById("total-gastos");
 
-const historialGastosDiv = document.querySelector("#historial-gastos-div");
-
-// Obtiene los gastos registrados
-const gastosRegistrados = gastos.obtenerGastos();
-
-// Muestra los gastos en la página
-if (gastosRegistrados.length > 0) {
-  historialGastosDiv.innerHTML = "<ul>";
+  // Mostrar los gastos en la página
+  const gastosRegistrados = gastos.obtenerGastos();
   gastosRegistrados.forEach((gasto) => {
-    historialGastosDiv.innerHTML += `<li>${gasto.fecha} - ${gasto.monto} - ${gasto.descripcion}</li>`;
+    const gastoElemento = document.createElement("div");
+    gastoElemento.textContent = `${gasto.fecha} - ${gasto.monto} - ${gasto.descripcion}`;
+    historialDiv.appendChild(gastoElemento);
   });
-  historialGastosDiv.innerHTML += "</ul>";
-} else {
-  historialGastosDiv.innerHTML = "<p>No hay gastos registrados</p>";
-}
+
+  // Mostrar el total de los gastos
+  totalGastosSpan.textContent = gastos.calcularTotal();
+});

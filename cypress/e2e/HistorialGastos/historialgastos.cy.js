@@ -44,5 +44,35 @@ describe("ver historial de gastos", () => {
         // Then -- Assert
         cy.contains('Debe llenar todos los campos.').should('be.visible');
     });
+    it("Debe mostrar el total de los gastos correctamente", () => {
+      // Introduce múltiples gastos válidos
+      cy.visit("/"); // Ruta del HTML donde se registran los gastos
+      cy.get("#fecha").type("2024-10-14");
+      cy.get("#monto").type(50);
+      cy.get("#descripcion").type("Fotocopias varias");
+      cy.get("#registrar-gasto-button").click();
+  
+      cy.get("#fecha").type("2024-10-15");
+      cy.get("#monto").type(30);
+      cy.get("#descripcion").type("Comida rápida");
+      cy.get("#registrar-gasto-button").click();
+  
+      // Cuando el usuario visita el historial de gastos
+      cy.visit("/src/Plantillas/historialgastos.html"); // Ruta del historial de gastos
+  
+      // Verifica que se muestren los gastos y el total correcto
+      cy.get("#historial-gastos-div")
+        .should("contain", "2024-10-14")
+        .and("contain", "50")
+        .and("contain", "Fotocopias varias");
+  
+      cy.get("#historial-gastos-div")
+        .should("contain", "2024-10-15")
+        .and("contain", "30")
+        .and("contain", "Comida rápida");
+  
+      // Verifica que el total de gastos se muestre correctamente
+      cy.get("#total-gastos").should("contain", "80");
+    });
   });
   
