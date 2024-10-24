@@ -12,7 +12,7 @@ Criterios de confirmación:
 */
 
 describe("ver historial de gastos", () => {
-    it.skip('Debe mostrar los gastos del último mes cuando el estudiante hace clic en "Registrar Gasto"', () => {
+    it('Debe mostrar los gastos del último mes cuando el estudiante hace clic en "Registrar Gasto"', () => {
         // Introduce un gasto válido
         cy.visit("/"); // Ruta del HTML donde se registran los gastos
         cy.get("#fecha").type("2024-10-14");
