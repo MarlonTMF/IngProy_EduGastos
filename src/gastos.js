@@ -6,7 +6,7 @@ class Gastos {
     this.gastos.push(gasto);
   }
   obtenerGastos() {
-    return this.gastos[0];
+    return this.gastos;
   }
 }
 export default Gastos;

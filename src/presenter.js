@@ -1,4 +1,4 @@
-//import sumar from "./sumador";
+import Gastos from "./gastos";
 
 const fecha = document.querySelector("#fecha");
 const monto = document.querySelector("#monto");
@@ -6,26 +6,29 @@ const descripcion = document.querySelector("#descripcion");
 
 const form = document.querySelector("#gastos-form");
 const gastosdiv = document.querySelector("#gastos-div");
+const gastos = new Gastos();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
   const fechaValue = fecha.value;
   const montoValue = Number.parseInt(monto.value);
   const descripcionValue = descripcion.value;
+  
+  const gasto = {
+    fecha: fechaValue,
+    monto: montoValue,
+    descripcion: descripcionValue,
+  };
+  gastos.registrarGasto(gasto);
+  
+  const gastosRegistrados = gastos.obtenerGastos();
+  console.log("gastos: "+ gastosRegistrados);
+  console.log("gastos registrados: "+gastosRegistrados);
 
-  //const gastos = new Gastos();
-  //gastos.registrargasto(fecha, monto, descripcion);
-  //const gastoregistrado = gastos.obtenerGastos(();
-
-  gastosdiv.innerHTML =
-    "<div>" +
-    fechaValue +
-    "</div>" +
-    "<div>" +
-    montoValue +
-    "</div>" +
-    "<div>" +
-    descripcionValue +
-    "</div>";
+  gastosdiv.innerHTML = "<ul>";  
+  gastosRegistrados.forEach((gastoRegistrado) => {
+    gastosdiv.innerHTML+= 
+       "<li>"+gastoRegistrado.fecha+"  "+gastoRegistrado.monto+"  "+gastoRegistrado.descripcion+"</li>";
+    });
+  gastosdiv.innerHTML+= "</ul>";
 });
