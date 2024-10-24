@@ -2,7 +2,7 @@
 Como estudiante
 Quiero poder registrar gastos
 Para recordarlos con facilidad 
-
+hilhilehjclrjekljcrlkejc
 Criterios de confirmación:
 - Cuando registro un gasto que contiene fecha, monto, descripcion el mismo deberia verse en la seccion de gastos
 - Cuando registro varios gastos, todos ellos deberian verse en la seccion de gastos
