@@ -1,19 +1,40 @@
+// Adaptación de la clase Gastos con almacenamiento en sessionStorage y validación
 class Gastos {
   constructor() {
-    const gastosGuardados = JSON.parse(localStorage.getItem("gastos")) || [];
-    this.gastos = gastosGuardados;
+    // Intentar cargar los gastos desde sessionStorage al instanciar la clase
+    const gastosGuardados = sessionStorage.getItem('gastos');
+    this.gastos = gastosGuardados ? JSON.parse(gastosGuardados) : [];
   }
+
   registrarGasto(gasto) {
+    // Validar campos antes de agregar el gasto
+    if (!gasto.fecha || !gasto.monto) {
+      return; // Salir si falta fecha o monto
+    }
+    // Agregar el gasto y guardarlo en sessionStorage
     this.gastos.push(gasto);
-    localStorage.setItem("gastos", JSON.stringify(this.gastos));
+    sessionStorage.setItem('gastos', JSON.stringify(this.gastos));
   }
+
   obtenerGastos() {
     return this.gastos;
   }
-    // Método que calcula el total de los gastos
-    calcularTotal() {
-      return this.gastos.reduce((total, gasto) => total + gasto.monto, 0);
+
+  calcularTotal() {
+    return this.gastos.reduce((total, gasto) => total + parseFloat(gasto.monto), 0); // Asegúrate de que monto sea numérico
   }
 }
-export default Gastos;
 
+// Función para validar los campos
+function validarCampos(fecha, monto) {
+  let errores = [];
+  if (!fecha) {
+    errores.push("El campo de fecha es obligatorio.");
+  }
+  if (!monto) {
+    errores.push("El campo de monto es obligatorio.");
+  }
+  return errores;
+}
+
+export { Gastos, validarCampos };

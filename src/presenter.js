@@ -1,4 +1,4 @@
-import {Gastos, validarCampos} from "./JS/RegistroGasto.js"; 
+import {Gastos, validarCampos} from "./gastos.js"; 
 
 // Lógica para registrar y mostrar gastos
 const formulario = document.getElementById('gastos-form');
