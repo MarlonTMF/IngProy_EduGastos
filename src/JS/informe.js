@@ -1,4 +1,4 @@
-import Gastos from "../gastos.js";
+import { Gastos } from "../gastos.js";
 
 const generarInformeButton = document.querySelector("#generar-informe-button");
 const informeTbody = document.querySelector("#informe-tbody");
@@ -6,16 +6,17 @@ const errorDiv = document.querySelector("#error-div");
 
 const gastos = new Gastos();
 
+// Cargar gastos desde el array global
 const cargarGastos = () => {
-  const gastosGuardados = JSON.parse(localStorage.getItem("gastos")) || [];
-  console.log("Gastos cargados desde localStorage en informe:", gastosGuardados);
+  const gastosGuardados = window.gastosArray || [];
+  console.log("Gastos cargados desde el array global en informe:", gastosGuardados);
   gastosGuardados.forEach(gasto => gastos.registrarGasto(gasto));
 };
 
 cargarGastos();
 
 generarInformeButton.addEventListener("click", () => {
-  const gastosRegistrados = gastos.obtenerGastos();
+  const gastosRegistrados = window.gastosArray || [];
   console.log("Gastos registrados al generar informe:", gastosRegistrados);
   
   if (gastosRegistrados.length === 0) {

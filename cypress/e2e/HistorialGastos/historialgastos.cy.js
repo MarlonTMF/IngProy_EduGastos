@@ -14,7 +14,7 @@ Criterios de confirmación:
 describe("ver historial de gastos", () => {
     it('Debe mostrar los gastos cuando el estudiante hace clic en "Registrar Gasto"', () => {
         // Introduce un gasto válido
-        cy.visit("/"); // Ruta del HTML donde se registran los gastos
+        cy.visit("http://localhost:1234/src/Plantillas/RegistrarGasto.html"); // Ruta del HTML donde se registran los gastos
         cy.get("#fecha").type("2024-10-14");
         cy.get("#monto").type(55);
         cy.get("#descripcion").type("Fotocopias varias");
@@ -24,7 +24,7 @@ describe("ver historial de gastos", () => {
     
         // Then -- Assert
         // Ahora visita el historial donde se muestran los gastos registrados
-        cy.visit("/src/Plantillas/historialgastos.html"); // Ruta del historial de gastos
+        cy.visit("http://localhost:1234/src/Plantillas/historialgastos.html"); // Ruta del historial de gastos
         cy.get("#historial-gastos-div")
           .should("contain", "2024-10-14")
           .and("contain", "55")
@@ -33,7 +33,7 @@ describe("ver historial de gastos", () => {
 
       it.skip('muestra advertencia cuando no se pueden mostrar los campos"', () => {
         // Introduce un gasto válido
-        cy.visit("/"); // Ruta del HTML donde se registran los gastos
+        cy.visit("http://localhost:1234/src/Plantillas/RegistrarGasto.html"); // Ruta del HTML donde se registran los gastos
         cy.get("#fecha").type("2024-10-14");
         cy.get("#monto").clear();
         cy.get("#descripcion").type("Fotocopias varias");
@@ -47,7 +47,7 @@ describe("ver historial de gastos", () => {
 
     it("Debe mostrar el total de los gastos correctamente", () => {
       // Introduce múltiples gastos válidos
-      cy.visit("/"); // Ruta del HTML donde se registran los gastos
+      cy.visit("http://localhost:1234/src/Plantillas/RegistrarGasto.html"); // Ruta del HTML donde se registran los gastos
       cy.get("#fecha").type("2024-10-14");
       cy.get("#monto").type(50);
       cy.get("#descripcion").type("Fotocopias varias");
@@ -59,7 +59,7 @@ describe("ver historial de gastos", () => {
       cy.get("#registrar-gasto-button").click();
   
       // Cuando el usuario visita el historial de gastos
-      cy.visit("/src/Plantillas/historialgastos.html"); // Ruta del historial de gastos
+      cy.visit("http://localhost:1234/src/Plantillas/historialgastos.html"); // Ruta del historial de gastos
   
       // Verifica que se muestren los gastos y el total correcto
       cy.get("#historial-gastos-div")

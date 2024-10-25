@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xml:lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduGastos - Inicio</title>
+    <title>Gastos e Informe de Gastos</title>
   </head>
   <body>
     <h1>Registro de gasto</h1>
@@ -24,12 +22,36 @@
     <div id="gastos-div"></div>
 
     <script type="module" src="./src/presenter.js"></script>
-     <a href="./src/Plantillas/RegistroDeIngresos.html">RegistroDeIngresos</a>
-     <br>
-     <a href="./src/Plantillas/InformeGastos.html">InformeDeGastos</a>
-     <a href="./src/Plantillas/RegistrarGasto.html">
-      <button>Registrar un gasto</button>
-    </a>
+    
+    <h1>Generar Informe de Gastos</h1>
+    <button id="generar-informe-button">Generar Informe</button>
+
+    <div id="informe-div">
+      <h2>Informe del Último Mes</h2>
+      <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody id="informe-tbody">
+        </tbody>
+      </table>
+    </div>
+
+    <div id="error-div" style="color: red; display: none;">
+      Alguno de los gastos no se puede incluir en el informe.
+    </div>
+
+    <script type="module" src="./src/JS/informe.js"></script>
+
+
+    <a href="./src/Plantillas/RegistrarGasto.html">Registrar Gasto</a>
+    <a href="./src/Plantillas/RegistroDeIngresos.html">Registro De Ingresos</a>
+    <a href="./src/Plantillas/historialgastos.html">Hitorial de Gastos</a>
+    <a href="./src/Plantillas/InformeGastos.html">Informe de Gastos</a>
+
   </body>
 </html>
-
