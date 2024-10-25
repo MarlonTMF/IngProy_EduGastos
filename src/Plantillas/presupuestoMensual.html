@@ -1,0 +1,35 @@
+<!-- /*
+    PRESUPUESTO MENSUAL
+    - establecer y editar el presupuesto del mes
+    -Permitir el  ingreso de una nueva categoria
+    -Establecer un monto especifico para la categoria
+    -Mostrar varias categorias y sus respectivos presupuestos
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuestos</title>
+</head>
+<body>
+    <header>
+        <h1>SUS PRESUPUESTOS</h1>
+        <div id="totalBudgetHeader">
+            <span>Presupuesto del mes: </span>
+            <span id="totalBudgetDisplay">$0</span>
+            <input type="number" id="totalBudgetInput" style="display: none;" value="0">
+            <button id="editBudgetButton">Editar Presupuesto</button>
+            <button id="saveBudgetButton" style="display: none;">Guardar Presupuesto</button>
+        </div>
+    </header>   
+
+    <div id="budgetContainer"></div>
+
+    <button id="addCategoryButton">Agregar Nueva Categoría</button>
+
+    <!-- <script src="../JS/PresupuestoM.js"></script> Script de lógica de negocio -->
+    <script type="module" src="../JS/presenterPresM.js"></script>
+    
+</body>
+</html>
