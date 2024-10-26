@@ -1,0 +1,91 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Arial', sans-serif; /* Tipografía limpia y moderna */
+    background-color: #f5f7fa; /* Color de fondo suave */
+    margin: 0; /* Sin margen */
+    padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Título principal */
+h1 {
+    color: #34495e; /* Color oscuro para el título */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 30px; /* Espaciado debajo del título */
+    font-size: 2.5em; /* Tamaño del texto */
+    text-transform: uppercase; /* Transformar a mayúsculas */
+}
+
+/* Estilo para el botón de generar informe */
+#generar-informe-button {
+    display: block; /* Comportamiento de bloque */
+    margin: 0 auto; /* Centrar el botón */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 1.2em; /* Tamaño de la fuente */
+    background-color: #2980b9; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+/* Cambiar color de fondo al pasar el mouse */
+#generar-informe-button:hover {
+    background-color: #1a6a8e; /* Color más oscuro al pasar el mouse */
+}
+
+/* Contenedor del informe */
+#informe-div {
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 30px; /* Espaciado superior */
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes de la tabla */
+}
+
+/* Encabezado de la tabla */
+thead {
+    background-color: #2980b9; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+}
+
+th, td {
+    padding: 10px; /* Espaciado interno de las celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+    border-bottom: 1px solid #ddd; /* Línea de separación entre filas */
+}
+
+/* Estilo para celdas en error */
+#error-div {
+    color: red; /* Color rojo para el mensaje de error */
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Espaciado superior */
+    display: none; /* Ocultar por defecto */
+    font-size: 1.1em; /* Tamaño de la fuente */
+}
+
+/* Estilos de respuesta para dispositivos móviles */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Menos espaciado en dispositivos móviles */
+    }
+    
+    h1 {
+        font-size: 2em; /* Tamaño de texto más pequeño */
+    }
+
+    #generar-informe-button {
+        font-size: 1em; /* Tamaño de la fuente más pequeño */
+        padding: 8px 16px; /* Espaciado interno reducido */
+    }
+
+    #informe-div {
+        padding: 15px; /* Espaciado interno reducido */
+    }
+}
