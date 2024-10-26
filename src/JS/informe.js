@@ -6,22 +6,20 @@ const errorDiv = document.querySelector("#error-div");
 
 const gastos = new Gastos();
 
-// Cargar gastos desde el array global
+// Cargar gastos desde sessionStorage
 const cargarGastos = () => {
-  const gastosGuardados = window.gastosArray || [];
-  console.log("Gastos cargados desde el array global en informe:", gastosGuardados);
-  gastosGuardados.forEach(gasto => gastos.registrarGasto(gasto));
+  const gastosGuardados = gastos.obtenerGastos(); // Usa el método para obtener los gastos
+  console.log("Gastos cargados desde sessionStorage en informe:", gastosGuardados);
+  return gastosGuardados;
 };
 
-cargarGastos();
-
 generarInformeButton.addEventListener("click", () => {
-  const gastosRegistrados = window.gastosArray || [];
-  console.log("Gastos registrados al generar informe:", gastosRegistrados);
-  
+  const gastosRegistrados = cargarGastos(); // Carga los gastos al hacer clic
+
   if (gastosRegistrados.length === 0) {
     errorDiv.style.display = "block";
     errorDiv.textContent = "No hay gastos registrados para mostrar.";
+    informeTbody.innerHTML = ""; // Limpiar tabla si no hay gastos
     return;
   }
 
