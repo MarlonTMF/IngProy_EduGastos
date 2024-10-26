@@ -46,18 +46,18 @@ describe("Presupuesto", () => {
 
     it("addCategory debería agregar una nueva categoría a la lista", () => {
         const presupuesto = new Presupuesto();
-        presupuesto.addCategory('Comida');
+        presupuesto.addCategory({ name: 'Comida', amount: 300 }); // Cambiar a objeto
 
         const categories = presupuesto.getCategories();
 
         // Verificar que la categoría 'Comida' esté presente
-        expect(categories).toContain('Comida');
+        expect(categories).toEqual([{ name: 'Comida', amount: 300 }]); // Cambiar para verificar el objeto completo
     });
 
     it("addCategory no debería agregar una categoría duplicada", () => {
         const presupuesto = new Presupuesto();
-        presupuesto.addCategory('Comida');
-        presupuesto.addCategory('Comida'); // Intentar agregar la misma categoría nuevamente
+        presupuesto.addCategory({ name: 'Comida', amount: 300 });
+        presupuesto.addCategory({ name: 'Comida', amount: 300 }); // Intentar agregar la misma categoría nuevamente
 
         const categories = presupuesto.getCategories();
 
@@ -73,4 +73,23 @@ describe("Presupuesto", () => {
         // Verificar que la lista esté vacía
         expect(categories).toEqual([]);
     });
+
+    it("addCategory debería agregar varias categorías con sus montos respectivos", () => {
+        const presupuesto = new Presupuesto();
+
+        // Agregar varias categorías
+        presupuesto.addCategory({ name: 'Comida', amount: 300 });
+        presupuesto.addCategory({ name: 'Transporte', amount: 150 });
+        presupuesto.addCategory({ name: 'Entretenimiento', amount: 100 });
+
+        const categories = presupuesto.getCategories();
+
+        // Verificar que todas las categorías estén presentes
+        expect(categories).toEqual([
+            { name: 'Comida', amount: 300 },
+            { name: 'Transporte', amount: 150 },
+            { name: 'Entretenimiento', amount: 100 },
+        ]);
+    });
+    
 });

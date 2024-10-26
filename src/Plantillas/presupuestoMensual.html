@@ -24,9 +24,18 @@
         </div>
     </header>   
 
-    <div id="budgetContainer"></div>
-
-    <button id="addCategoryButton">Agregar Nueva Categoría</button>
+    <div id="addCategoryContainer" style="display: none;">
+    <input type="text" id="categoryNameInput" placeholder="Nombre de la categoría">
+    <input type="number" id="categoryAmountInput" placeholder="Monto de la categoría">
+    <button id="saveCategoryButton">Guardar Categoría</button>
+</div>
+<button id="addCategoryButton">Agregar Categoría</button> <!-- Agregar este botón -->
+    
+    <div id="categoriesList">
+        <h2>Categorías y Presupuestos</h2>
+        <ul id="categoryListDisplay"></ul>
+    </div>
+    
 
     <!-- <script src="../JS/PresupuestoM.js"></script> Script de lógica de negocio -->
     <script type="module" src="../JS/presenterPresM.js"></script>
