@@ -1,0 +1,96 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Arial', sans-serif; /* Tipografía legible */
+    background-color: #f0f4f8; /* Color de fondo suave */
+    margin: 0; /* Sin margen */
+    padding: 20px; /* Espaciado alrededor del contenido */
+    display: flex; /* Usar flexbox para centrar contenido */
+    flex-direction: column; /* Direccionar el contenido verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+}
+
+/* Estilo del título */
+h1 {
+    color: #2980b9; /* Color azul */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Estilos para el formulario */
+#gastos-form {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 300px; /* Ancho fijo para el formulario */
+}
+
+/* Estilos para las etiquetas */
+label {
+    display: block; /* Cada etiqueta en su propia línea */
+    margin-bottom: 5px; /* Espaciado inferior */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilos para los inputs */
+input[type="date"],
+input[type="number"],
+input[type="text"],
+input[type="submit"] {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+/* Estilo de inputs al recibir foco */
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border-color: #2980b9; /* Color azul al enfocar */
+    outline: none; /* Sin contorno predeterminado */
+}
+
+/* Estilo del botón de envío */
+input[type="submit"] {
+    background-color: #27ae60; /* Color verde */
+    color: white; /* Texto blanco */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    border: none; /* Sin borde */
+    font-weight: bold; /* Negrita */
+}
+
+input[type="submit"]:hover {
+    background-color: #219150; /* Color verde más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Levantar ligeramente el botón */
+}
+
+/* Estilo para los mensajes de error */
+span[id^="error-"] {
+    font-size: 0.9em; /* Tamaño de fuente más pequeño */
+    margin-top: -10px; /* Margen negativo para acercar el texto */
+}
+
+/* Estilo para el div de gastos */
+#gastos-div {
+    margin-top: 20px; /* Espaciado superior */
+    width: 100%; /* Ancho completo */
+    max-width: 500px; /* Máximo ancho para el div */
+    background-color: #e7e7e7; /* Fondo gris suave */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Menos espaciado en dispositivos móviles */
+    }
+
+    #gastos-form {
+        width: 90%; /* Ancho del formulario más adaptativo */
+    }
+}

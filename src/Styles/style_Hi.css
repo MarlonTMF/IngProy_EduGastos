@@ -1,0 +1,68 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía moderna */
+    background-color: #f0f4f8; /* Color de fondo claro */
+    margin: 0;
+    padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Título de la página */
+h1 {
+    color: #2c3e50; /* Color oscuro para el título */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 30px; /* Espaciado debajo del título */
+    font-size: 2.5em; /* Tamaño del texto */
+    text-transform: uppercase; /* Transformar a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Contenedor del historial de gastos */
+#historial-gastos-div {
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px; /* Espaciado interno */
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+    overflow-x: auto; /* Desplazamiento horizontal si es necesario */
+}
+
+/* Estilos para el total de gastos */
+#total-gastos-div {
+    margin-top: 20px; /* Espaciado superior */
+    text-align: center; /* Centrar el texto */
+    font-size: 1.5em; /* Tamaño del texto */
+    color: #2980b9; /* Color azul */
+}
+
+/* Estilos para el enlace de regreso */
+a {
+    display: inline-block; /* Comportamiento de bloque */
+    background-color: #2980b9; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+    padding: 10px 15px; /* Espaciado interno */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-top: 20px; /* Espaciado superior */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+/* Cambiar el color de fondo al pasar el mouse */
+a:hover {
+    background-color: #1c598a; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilos de respuesta para dispositivos móviles */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Menos espaciado en dispositivos móviles */
+    }
+    
+    h1 {
+        font-size: 2em; /* Tamaño del texto más pequeño */
+    }
+
+    #total-gastos-div {
+        font-size: 1.2em; /* Texto más pequeño para total */
+    }
+}

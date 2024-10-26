@@ -1,0 +1,143 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía moderna */
+    background-color: #f4f4f4; /* Color de fondo suave */
+    margin: 0; /* Sin margen */
+    padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Encabezado */
+header {
+    background-color: #2980b9; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; /* Centrar texto */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Título del encabezado */
+h1 {
+    margin: 0; /* Sin margen */
+    font-size: 2.5em; /* Tamaño de texto grande */
+}
+
+/* Estilos del total de presupuesto */
+#totalBudgetHeader {
+    margin-top: 15px; /* Espaciado superior */
+    font-size: 1.5em; /* Tamaño de texto para presupuesto */
+}
+
+/* Estilo para el display del presupuesto total */
+#totalBudgetDisplay {
+    font-weight: bold; /* Negrita para resaltar */
+    color: #f39c12; /* Color dorado */
+}
+
+/* Estilo para los botones */
+button {
+    padding: 10px 15px; /* Espaciado interno */
+    margin: 5px; /* Margen entre botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+/* Estilo de botones edit y save */
+#editBudgetButton {
+    background-color: #f39c12; /* Color dorado */
+    color: white; /* Texto blanco */
+}
+
+#editBudgetButton:hover {
+    background-color: #e67e22; /* Color más oscuro al pasar el mouse */
+}
+
+#saveBudgetButton {
+    background-color: #27ae60; /* Color verde */
+    color: white; /* Texto blanco */
+}
+
+#saveBudgetButton:hover {
+    background-color: #219150; /* Color más oscuro al pasar el mouse */
+}
+
+/* Contenedor para agregar categorías */
+#addCategoryContainer {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-top: 20px; /* Margen superior */
+}
+
+/* Estilo de los inputs */
+input[type="text"],
+input[type="number"] {
+    width: calc(50% - 20px); /* Ancho relativo */
+    padding: 10px; /* Espaciado interno */
+    margin: 5px 0; /* Espaciado vertical */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de la fuente */
+}
+
+/* Estilo del botón para agregar categorías */
+#addCategoryButton {
+    background-color: #2980b9; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+}
+
+#addCategoryButton:hover {
+    background-color: #1a6a8e; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilos para la lista de categorías */
+#categoriesList {
+    margin-top: 30px; /* Espaciado superior */
+}
+
+#categoriesList h2 {
+    text-align: center; /* Centrar el texto */
+}
+
+/* Estilos para la lista de categorías */
+#categoryListDisplay {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+#categoryListDisplay li {
+    background-color: #e7e7e7; /* Color de fondo gris suave */
+    margin: 10px 0; /* Margen entre elementos */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    display: flex; /* Flexbox para contenido */
+    justify-content: space-between; /* Espaciado entre elementos */
+    align-items: center; /* Centrar verticalmente */
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Menos espaciado en dispositivos móviles */
+    }
+    
+    h1 {
+        font-size: 2em; /* Tamaño de texto más pequeño */
+    }
+
+    #totalBudgetHeader {
+        font-size: 1.2em; /* Tamaño de texto reducido */
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: calc(100% - 20px); /* Ancho completo en móviles */
+    }
+
+    button {
+        width: 100%; /* Botones de ancho completo en móviles */
+    }
+}
