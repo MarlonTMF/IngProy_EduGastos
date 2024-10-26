@@ -1,5 +1,4 @@
-import { getTotalBudget, setTotalBudget } from './PresupuestoM.js';
-
+import { Presupuesto } from './PresupuestoM.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const totalBudgetDisplay = document.getElementById('totalBudgetDisplay');
@@ -7,8 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const editBudgetButton = document.getElementById('editBudgetButton');
     const saveBudgetButton = document.getElementById('saveBudgetButton');
 
+    // Crear una instancia de la clase Presupuesto
+    const presupuesto = new Presupuesto();
+    
+
     function renderTotalBudget() {
-        const currentBudget = getTotalBudget();
+        const currentBudget = presupuesto.getTotalBudget();
         totalBudgetDisplay.textContent = `$${currentBudget}`;
         totalBudgetInput.value = currentBudget;
     }
@@ -25,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveBudgetButton.addEventListener('click', () => {
         const newBudget = parseFloat(totalBudgetInput.value);
         if (!isNaN(newBudget) && newBudget > 0) {
-            setTotalBudget(newBudget);
+            presupuesto.setTotalBudget(newBudget);
             renderTotalBudget();
         } else {
             alert('Por favor ingrese un valor válido para el presupuesto.');
