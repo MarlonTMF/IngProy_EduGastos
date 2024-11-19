@@ -1,6 +1,5 @@
 describe("Presupuesto Mensual", () => {
     beforeEach(() => {
-        // Visitar la página antes de cada prueba
         cy.visit("http://localhost:1234/src/Plantillas/presupuestoMensual.html");
     });
 

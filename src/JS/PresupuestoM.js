@@ -1,30 +1,56 @@
+import Ingresos from "./ingresos";
+
 class Presupuesto {
-    constructor() {
-        // Cargar categorías desde sessionStorage al instanciar la clase
+    constructor(ingresosInstance) {
+        this.ingresosInstance = ingresosInstance;
+        console.log("Ingresos pasados a Presupuesto:", this.ingresosInstance.obtenerIngresos()); // Verifica los ingresos
         const categoriasGuardadas = sessionStorage.getItem('budgets');
         this.budgets = categoriasGuardadas ? JSON.parse(categoriasGuardadas) : [];
+        this.presupuestoTotalG = ingresosInstance.obtenerTotalIngresos();
+        console.log("Presupuesto total global:", this.presupuestoTotalG); // Verifica el presupuesto global
+        this.presupuestoMensual = this.getTotalBudget();
     }
 
     getTotalBudget() {
-        // Obtener el presupuesto total desde sessionStorage, o devolver 0 si no está definido
-        return parseFloat(sessionStorage.getItem('totalMonthlyBudget')) || 0;
+        const totalBudget = parseFloat(sessionStorage.getItem('totalMonthlyBudget')) || 0;
+        console.log("Presupuesto mensual desde sessionStorage:", totalBudget); // Verifica el presupuesto mensual
+        return totalBudget;
     }
 
     setTotalBudget(amount) {
-        // Establecer el presupuesto total y guardarlo en sessionStorage
+        console.log("Intentando establecer presupuesto mensual:", amount);
+        if (amount > this.presupuestoTotalG) {
+            alert(`El presupuesto mensual no puede exceder el total de ingresos ($${this.presupuestoTotalG})`);
+            return;
+        }
+        this.presupuestoMensual = amount;
         sessionStorage.setItem('totalMonthlyBudget', amount);
+        console.log("Presupuesto mensual actualizado:", this.presupuestoMensual); // Verifica la actualización
     }
 
     addCategory(category) {
         // Validar la categoría antes de agregarla
         if (category.name && !this.budgets.find(cat => cat.name === category.name)) {
+            if(category.amount > this.presupuestoMensual){
+                alert(`No hay sficiente presupuesto mensual disponible , restante: $${this.presupuestoMensual}`);
+                return;
+            }
             this.budgets.push(category); // Agregar objeto de categoría
+            this.presupuestoMensual -= category.amount;
             sessionStorage.setItem('budgets', JSON.stringify(this.budgets));
+            sessionStorage.setItem('totalMonthlyBudget',this.presupuestoMensual);
         }
     }
 
     getCategories() {
         return this.budgets;
+    }
+
+    getPresupuestoTotalGlobal(){
+        return this.presupuestoTotalG;
+    }
+    getPresupuestoMensualRestante() {
+        return this.presupuestoMensual;
     }
 }
 

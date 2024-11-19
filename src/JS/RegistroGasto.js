@@ -1,3 +1,4 @@
+import Ingresos from "./ingresos";
 
 class Gastos {
   constructor() {

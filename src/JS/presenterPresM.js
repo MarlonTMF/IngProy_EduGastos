@@ -1,3 +1,4 @@
+import Ingresos from './ingresos.js';
 import { Presupuesto } from './PresupuestoM.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,8 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryListDisplay = document.getElementById('categoryListDisplay');
 
     // Crear una instancia de la clase Presupuesto
-    const presupuesto = new Presupuesto();
-    
+    const ingresos = new Ingresos(); // Instancia de ingresos
+    const presupuesto = new Presupuesto(ingresos);
+
+
     function renderTotalBudget() {
         const currentBudget = presupuesto.getTotalBudget();
         totalBudgetDisplay.textContent = `$${currentBudget}`;
@@ -64,11 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryAmount = parseFloat(categoryAmountInput.value);
 
         if (categoryName && !isNaN(categoryAmount) && categoryAmount > 0) {
+            if (categoryAmount > presupuesto.getPresupuestoMensualRestante()) {
+                alert(`No hay suficiente presupuesto mensual disponible. Restante: $${presupuesto.getPresupuestoMensualRestante()}`);
+                return;
+            }
             presupuesto.addCategory({ name: categoryName, amount: categoryAmount });
-            renderCategories(); // Actualizar la lista de categorías
+            renderCategories();
+            renderTotalBudget(); // Actualiza el presupuesto mensual restante
             categoryNameInput.value = '';
             categoryAmountInput.value = '';
-            document.getElementById('addCategoryContainer').style.display = 'none'; // Ocultar el contenedor después de agregar
+            document.getElementById('addCategoryContainer').style.display = 'none';
         } else {
             alert('Por favor, ingrese un nombre válido y un monto.');
         }
