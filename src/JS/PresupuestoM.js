@@ -35,7 +35,8 @@ class Presupuesto {
                 alert(`No hay sficiente presupuesto mensual disponible , restante: $${this.presupuestoMensual}`);
                 return;
             }
-            this.budgets.push(category); // Agregar objeto de categoría
+            category.gastado = 0;
+            this.budgets.push(category); 
             this.presupuestoMensual -= category.amount;
             sessionStorage.setItem('budgets', JSON.stringify(this.budgets));
             sessionStorage.setItem('totalMonthlyBudget',this.presupuestoMensual);
@@ -45,6 +46,10 @@ class Presupuesto {
     getCategories() {
         return this.budgets;
     }
+    getGastoCategoria() {
+        
+        return this.budgets.gastado;
+    }
 
     getPresupuestoTotalGlobal(){
         return this.presupuestoTotalG;
@@ -52,6 +57,7 @@ class Presupuesto {
     getPresupuestoMensualRestante() {
         return this.presupuestoMensual;
     }
+
 }
 
 // Función de validación para categorías

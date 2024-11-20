@@ -25,9 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCategories() {
         categoryListDisplay.innerHTML = ''; // Limpiar la lista
         const categories = presupuesto.getCategories();
+        // const gastoActual = 
         categories.forEach(category => {
             const li = document.createElement('li');
-            li.textContent = `${category.name}: $${category.amount}`; // Muestra el nombre y el monto
+            li.textContent = `${category.name}: Monto Limite $${category.amount} | Monto Actual $${category.gastado}`; // Muestra el nombre y el monto
             categoryListDisplay.appendChild(li);
         });
     }
