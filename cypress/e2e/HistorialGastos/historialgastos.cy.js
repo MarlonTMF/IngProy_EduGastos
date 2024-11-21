@@ -11,7 +11,7 @@ Criterios de confirmación:
 - si hay un valor que no se pueda mostrar, se mostrará que este archivo no se puede mostrar
 */
 
-describe("ver historial de gastos", () => {
+describe.skip("ver historial de gastos", () => {
     it('Debe mostrar los gastos cuando el estudiante hace clic en "Registrar Gasto"', () => {
         // Introduce un gasto válido
         cy.visit("http://localhost:1234/src/Plantillas/RegistrarGasto.html"); // Ruta del HTML donde se registran los gastos

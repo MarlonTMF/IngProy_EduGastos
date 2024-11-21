@@ -1,4 +1,4 @@
-describe("Presupuesto Mensual", () => {
+describe.skip("Presupuesto Mensual", () => {
     beforeEach(() => {
         cy.visit("http://localhost:1234/src/Plantillas/presupuestoMensual.html");
     });

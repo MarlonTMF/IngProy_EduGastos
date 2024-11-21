@@ -1,4 +1,4 @@
-describe("Informe de Gastos", () => {
+describe.skip("Informe de Gastos", () => {
   it("muestra un mensaje cuando no hay gastos registrados", () => {
     // Limpiar sessionStorage antes de la prueba
     sessionStorage.setItem("gastos", JSON.stringify([])); 

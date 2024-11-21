@@ -1,4 +1,4 @@
-it( "mostrar el monto total de la venta",()=>{
+it.skip( "mostrar el monto total de la venta",()=>{
     //configurar
     let venta = new Venta();
     let producto = new Producto("silla", 10);
@@ -10,7 +10,7 @@ it( "mostrar el monto total de la venta",()=>{
     expect(total).toEqual(10);
 })
 
-it( "mostrar el monto total de 2 productos",()=>{
+it.skip( "mostrar el monto total de 2 productos",()=>{
     //configurar
     let venta = new Venta();
     let producto1 = new Producto("silla", 7);

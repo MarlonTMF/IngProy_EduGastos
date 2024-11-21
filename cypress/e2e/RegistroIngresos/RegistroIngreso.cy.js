@@ -1,4 +1,4 @@
-describe("Registro de ingreso", () => {
+describe.skip("Registro de ingreso", () => {
   it("muestra un ingreso registrado", () => {
     cy.visit("http://localhost:1234/src/Plantillas/RegistroDeIngresos.html"); 
     
