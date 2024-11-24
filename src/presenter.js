@@ -30,10 +30,27 @@ formulario.addEventListener('submit', (event) => {
     });
     return;  // Detener si hay errores
   }
-  // Registrar gasto
+ 
   const nuevoGasto = { fecha, monto, descripcion };
   gastos.registrarGasto(nuevoGasto);
 
-  // Mostrar el gasto en la página
-  gastosDiv.innerHTML += `<p>Fecha: ${fecha} - Monto: ${monto} - Descripción: ${descripcion || 'Sin descripción'}</p>`;
+  const gastoElement = document.createElement("div");
+  gastoElement.classList.add("gasto-item");
+
+  gastoElement.innerHTML = `
+    <p>
+      Fecha: ${fecha} - Monto: ${monto} - Descripción: ${descripcion || '_ _ _'}
+      <button class="editar-gasto">Editar</button>
+    </p>
+  `;
+
+  const editarButton = gastoElement.querySelector(".editar-gasto");
+  editarButton.
+  editarBut
+addEventListener("click", () => {
+    
+    con
+console.log("Editar clicado para el gasto:", nuevoGasto);
+  });
+  gastosDiv.appendChild(gastoElement);
 });

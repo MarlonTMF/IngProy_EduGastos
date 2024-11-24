@@ -22,6 +22,9 @@ h1 {
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
     width: 300px; /* Ancho fijo para el formulario */
+    display: flex; /* Flexbox para organizar elementos */
+    flex-direction: column; /* Colocar elementos en columna */
+    gap: 15px; /* Espaciado uniforme entre elementos */
 }
 
 /* Estilos para las etiquetas */
@@ -36,7 +39,8 @@ input[type="date"],
 input[type="number"],
 input[type="text"],
 input[type="submit"] {
-    width: 100%; /* Ancho completo */
+    width: calc(100% - 20px); /* Reducir ancho según el padding del formulario */
+    margin: 0 auto; /* Centrar dentro del formulario */
     padding: 10px; /* Espaciado interno */
     margin-bottom: 15px; /* Espaciado inferior */
     border: 1px solid #ddd; /* Borde suave */
@@ -74,15 +78,42 @@ span[id^="error-"] {
 }
 
 /* Estilo para el div de gastos */
-#gastos-div {
-    margin-top: 20px; /* Espaciado superior */
-    width: 100%; /* Ancho completo */
-    max-width: 500px; /* Máximo ancho para el div */
-    background-color: #e7e7e7; /* Fondo gris suave */
-    padding: 15px; /* Espaciado interno */
+/* Estilo para cada gasto registrado */
+#gastos-div .gasto-item {
+    display: flex; /* Usar flexbox para alinear contenido */
+    justify-content: space-between; /* Separar texto y botón */
+    align-items: center; /* Centrar verticalmente */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Separación entre elementos */
+    background-color: #ffffff; /* Fondo blanco */
+    border: 1px solid #ddd; /* Borde claro */
     border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra ligera */
 }
+
+/* Texto del gasto */
+#gastos-div .gasto-item p {
+    margin: 0; /* Eliminar margen */
+    font-size: 0.9em; /* Tamaño de fuente más pequeño */
+}
+
+/* Estilo del botón Editar */
+#gastos-div .gasto-item .editar-gasto {
+    background-color: #2c4bd4; 
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 3px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 0.8em; /* Tamaño de fuente más pequeño */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Hover del botón Editar */
+#gastos-div .gasto-item .editar-gasto:hover {
+    background-color: #d87b04; /* Color naranja más oscuro */
+}
+
 
 /* Media queries para diseño responsivo */
 @media (max-width: 600px) {
