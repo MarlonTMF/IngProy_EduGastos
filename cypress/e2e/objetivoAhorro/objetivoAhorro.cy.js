@@ -45,5 +45,34 @@ describe("Gestión de Objetivo de Ahorro", () => {
         .and("contain", "Descripción: Ahorro para coche")
         .and("contain", "Fecha límite: 2025-06-30");
     });
+    it("Debería mostrar correctamente los objetivos guardados en sessionStorage", () => {
+        cy.get("#totalBudgetInput").type("500");
+        cy.get("#descripcion").type("Ahorro para celular");
+        cy.get("#fechaLimite").type("2025-01-01");
+        cy.get("#guardarObjetivo").click();
+    
+        cy.get("#totalBudgetInput").type("2000");
+        cy.get("#descripcion").type("Ahorro para laptop");
+        cy.get("#fechaLimite").type("2025-06-30");
+        cy.get("#guardarObjetivo").click();
+    
+        cy.get("#objetivosContainer")
+            .should("contain", "Monto: $500")
+            .and("contain", "Descripción: Ahorro para celular")
+            .and("contain", "Fecha límite: 2025-01-01");
+    
+        cy.get("#objetivosContainer")
+            .should("contain", "Monto: $2000")
+            .and("contain", "Descripción: Ahorro para laptop")
+            .and("contain", "Fecha límite: 2025-06-30");
+    });
+    it("Debería manejar correctamente el intento de editar un objetivo inexistente", () => {
+        cy.get(".editar").should("not.exist");
+    
+        cy.get("#editarObjetivo").click({ force: true }); // Simular un clic forzado para comprobar errores
+        cy.on("window:alert", (text) => {
+          expect(text).to.equal("No hay un objetivo establecido para editar.");
+        });
+      });    
   
 });
