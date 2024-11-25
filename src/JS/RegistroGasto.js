@@ -9,7 +9,12 @@ class Gastos {
     if (!gasto.fecha || !gasto.monto) {
       return;  
     }
-    this.gastos.push(gasto);
+    const nuevoGasto = { 
+      fecha: gasto.fecha, 
+      monto: gasto.monto, 
+      descripcion: gasto.descripcion || "" 
+    };
+    this.gastos.push(nuevoGasto);
     sessionStorage.setItem('gastos', JSON.stringify(this.gastos));
   }
 

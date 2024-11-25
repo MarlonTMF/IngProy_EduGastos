@@ -1,4 +1,4 @@
-import { Presupuesto } from './PresupuestoM.js';
+import { Presupuesto, validarCategoria } from './PresupuestoM.js';
 
 describe("Presupuesto", () => {
     beforeEach(() => {
@@ -90,6 +90,10 @@ describe("Presupuesto", () => {
             { name: 'Transporte', amount: 150 },
             { name: 'Entretenimiento', amount: 100 },
         ]);
+    });
+    it("debería retornar un error si el nombre de la categoría está vacío", () => {
+        const errores = validarCategoria("");  // Nombre vacío
+        expect(errores).toEqual(["El nombre de la categoría es obligatorio."]);  // Esperamos que el error sea el indicado
     });
     
 });

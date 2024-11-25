@@ -1,4 +1,4 @@
-import { Gastos } from "../gastos.js";
+import { Gastos } from "./RegistroGasto.js";
 
 const generarInformeButton = document.querySelector("#generar-informe-button");
 const informeTbody = document.querySelector("#informe-tbody");
