@@ -21,5 +21,16 @@ describe("ObjetivoAhorro (Parte 1)", () => {
 
         expect(guardado).toEqual(objetivo);
         expect(objetivoAhorro.obtenerObjetivosDeStorage()).toEqual([objetivo]);
+    }); 
+    
+    it("Debería permitir editar el objetivo de ahorro correctamente", () => {
+        const objetivoOriginal = { monto: '1000', descripcion: 'Ahorro para vacaciones', fechaLimite: '2024-12-31' };
+        objetivoAhorro.guardarObjetivo(objetivoOriginal.monto, objetivoOriginal.descripcion, objetivoOriginal.fechaLimite);
+    
+        const nuevoObjetivo = { monto: '2000', descripcion: 'Ahorro para coche', fechaLimite: '2025-01-01' };
+        const resultado = objetivoAhorro.editarObjetivo(0, nuevoObjetivo.monto, nuevoObjetivo.descripcion, nuevoObjetivo.fechaLimite);
+    
+        expect(resultado).toEqual(nuevoObjetivo);
     });
+    
 });
