@@ -32,7 +32,13 @@ class Gastos {
     this.gastos[index] = gastoActualizado;
     sessionStorage.setItem('gastos', JSON.stringify(this.gastos));
   }
+  eliminarGasto(indice) {
+    this.gastos.splice(indice, 1); 
+    sessionStorage.setItem("gastos", JSON.stringify(this.gastos)); 
+  }
+  
 }
+
 
 function validarCampos(fecha, monto) {
   let errores = [];

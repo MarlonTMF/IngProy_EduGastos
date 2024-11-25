@@ -77,6 +77,11 @@ function renderizarGastos() {
     });
     const eliminarButton = gastoElement.querySelector(".eliminar-gasto");
     eliminarButton.addEventListener("click", () => {
+      const confirmacion = window.confirm("¿Estás seguro de que deseas eliminar este gasto?");
+      if (confirmacion) {
+        gastos.eliminarGasto(index); 
+        renderizarGastos(); 
+      }
     });
     gastosDiv.appendChild(gastoElement);
   });

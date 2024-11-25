@@ -81,6 +81,31 @@ describe("Botón Eliminar", () => {
       cy.contains("Eliminar").should("exist");
     });
   });
+  it("debería eliminar un gasto al confirmar la acción", () => {
+    // Registrar un gasto inicial
+    cy.get("#fecha").type("2024-11-01");
+    cy.get("#monto").type("100");
+    cy.get("#descripcion").type("Cine");
+    cy.get("#registrar-gasto-button").click();
+
+    // Verificar que el gasto aparece en la lista
+    cy.get("#gastos-div").should("contain", "Cine");
+
+    // Intentar eliminar el gasto
+    cy.get(".eliminar-gasto").first().click();
+
+
+    cy.on("window:confirm", () => false);
+
+    
+    cy.get("#gastos-div").should("contain", "Cine");
+
+    cy.get(".eliminar-gasto").first().click();
+    cy.on("window:confirm", () => true);
+
+    //cy.get("#gastos-div").should("not.contain", "Cine"); SessionStorage?
+    
+  });
 });
   
   

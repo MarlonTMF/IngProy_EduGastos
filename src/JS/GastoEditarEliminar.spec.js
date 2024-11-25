@@ -23,6 +23,9 @@ Object.defineProperty(global, "sessionStorage", {
   value: mockSessionStorage,
 });
 describe("Editar y Eliminar un gasto", () => {
+    beforeEach(() => {
+        sessionStorage.clear(); 
+    });
 
     it("debería editar un gasto existente", () => {
       const gastos = new Gastos();
@@ -51,5 +54,21 @@ describe("Editar y Eliminar un gasto", () => {
         const gastoEditado = gastos.obtenerGastos()[0];
         expect(gastoEditado).toEqual(gastoValido);
     });
+    it("debería eliminar un gasto existente", () => {
+        const gastos = new Gastos();
+        const gasto1 = { fecha: "2024-11-01", monto: 100, descripcion: "Cine" };
+        const gasto2 = { fecha: "2024-11-05", monto: 150, descripcion: "Teatro" };
+        
+        gastos.registrarGasto(gasto1);
+        gastos.registrarGasto(gasto2);
+        
+       
+        gastos.eliminarGasto(0);
+       
+        const sessionData = JSON.parse(sessionStorage.getItem("gastos"));
+        expect(sessionData).toHaveLength(1);
+        expect(sessionData).toEqual([gasto2]);
+       
+    });
     
-  });
+});
