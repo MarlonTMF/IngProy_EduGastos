@@ -63,6 +63,7 @@ function renderizarGastos() {
       <p>
         Fecha: ${gasto.fecha} - Monto: ${gasto.monto} - Descripción: ${gasto.descripcion || "_ _ _"}
         <button class="editar-gasto">Editar</button>
+        <button class="eliminar-gasto">Eliminar</button>
       </p>
     `;
     const editarButton = gastoElement.querySelector(".editar-gasto");
@@ -73,6 +74,9 @@ function renderizarGastos() {
       document.getElementById("descripcion").value = gasto.descripcion;
 
       indiceEdicion = index;
+    });
+    const eliminarButton = gastoElement.querySelector(".eliminar-gasto");
+    eliminarButton.addEventListener("click", () => {
     });
     gastosDiv.appendChild(gastoElement);
   });

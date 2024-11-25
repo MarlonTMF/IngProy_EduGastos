@@ -113,6 +113,24 @@ span[id^="error-"] {
 #gastos-div .gasto-item .editar-gasto:hover {
     background-color: #d87b04; /* Color naranja más oscuro */
 }
+/* Estilo del botón Eliminar */
+#gastos-div .gasto-item .eliminar-gasto {
+    background-color: #e74c3c; /* Color rojo */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 3px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 0.8em; /* Tamaño de fuente */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    transition: background-color 0.3s ease; /* Transición suave */
+    margin-left: 5px; /* Separación con el botón Editar */
+}
+
+/* Hover del botón Eliminar */
+#gastos-div .gasto-item .eliminar-gasto:hover {
+    background-color: #c0392b; /* Rojo más oscuro */
+}
+
 
 
 /* Media queries para diseño responsivo */
