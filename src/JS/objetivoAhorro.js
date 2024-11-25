@@ -23,7 +23,12 @@ class ObjetivoAhorro {
     obtenerObjetivosDeStorage() {
         const objetivosStorage = sessionStorage.getItem('objetivosAhorro');
         return objetivosStorage ? JSON.parse(objetivosStorage) : [];
+    } 
+    
+    obtenerDetallesObjetivos() {
+        return this.objetivosGuardados;
     }
+    
 }
 
 export default ObjetivoAhorro;
