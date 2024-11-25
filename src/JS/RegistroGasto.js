@@ -27,7 +27,7 @@ class Gastos {
   }
   editarGasto(index, gastoActualizado) {
     if (!gastoActualizado.fecha || !gastoActualizado.monto) {
-      return;
+      return ["El campo de fecha y monto son obligatorios."];
     }
     this.gastos[index] = gastoActualizado;
     sessionStorage.setItem('gastos', JSON.stringify(this.gastos));

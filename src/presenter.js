@@ -39,7 +39,10 @@ formulario.addEventListener('submit', (event) => {
   const nuevoGasto = { fecha, monto, descripcion };
 
   if (indiceEdicion !== null) {
-
+    const erroresEdicion = validarCampos(nuevoGasto.fecha, nuevoGasto.monto);
+        if (erroresEdicion.length > 0) {
+          return;
+        }
     gastos.editarGasto(indiceEdicion, nuevoGasto);
     indiceEdicion = null; 
   } else {
@@ -58,7 +61,7 @@ function renderizarGastos() {
 
     gastoElement.innerHTML = `
       <p>
-        Fecha: ${gasto.fecha} - Monto: ${gasto.monto} - Descripción: ${gasto.descripcion || "Sin descripción"}
+        Fecha: ${gasto.fecha} - Monto: ${gasto.monto} - Descripción: ${gasto.descripcion || "_ _ _"}
         <button class="editar-gasto">Editar</button>
       </p>
     `;

@@ -34,6 +34,22 @@ describe("Editar y Eliminar un gasto", () => {
   
       expect(gastos.obtenerGastos()[0]).toEqual(gastoActualizado);
     });
+    it("no debería editar si falta fecha o monto", () => {
+        const gastos = new Gastos();
+        const gastoOriginal = { fecha: "2024-11-01", monto: 100, descripcion: "Cine" };
+    
+        gastos.registrarGasto(gastoOriginal);
+    
+        const gastoSinMonto = { fecha: "2024-11-02", monto: "", descripcion: "Cena" };
+         const mensajeError = gastos.editarGasto(0, gastoSinMonto);
+        expect(mensajeError).toEqual(["El campo de fecha y monto son obligatorios."]);
 
 
+        const gastoValido = { fecha: "2024-11-02", monto: 200, descripcion: "Cena" };
+        gastos.editarGasto(0, gastoValido);
+    
+        const gastoEditado = gastos.obtenerGastos()[0];
+        expect(gastoEditado).toEqual(gastoValido);
+    });
+    
   });

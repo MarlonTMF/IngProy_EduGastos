@@ -29,6 +29,23 @@ describe("Botón Editar junto a cada gasto", () => {
       cy.get("#monto").should("have.value", "100");
       cy.get("#descripcion").should("have.value", "Cine");
     });
+    it("Debe permitir modificar un gasto existente", () => {
+        // Presionar el botón Editar
+        cy.get("#gastos-div .gasto-item").contains("Editar").click();
+    
+        // Modificar los valores en el formulario
+        cy.get("#fecha").clear().type("2024-11-05");
+        cy.get("#monto").clear().type("150");
+        cy.get("#descripcion").clear().type("Teatro");
+    
+        // Registrar los cambios
+        cy.get("#registrar-gasto-button").click();
+    
+        // Verificar que los datos actualizados aparecen en el listado de gastos
+        cy.get("#gastos-div").should("contain", "2024-11-05")
+                             .and("contain", "150")
+                             .and("contain", "Teatro");
+    });
 
   });
   
