@@ -1,7 +1,8 @@
 
 class Gastos {
   constructor() {
-    this.gastos = [];
+    const gastosGuardados = sessionStorage.getItem('gastos');
+    this.gastos = gastosGuardados ? JSON.parse(gastosGuardados) : [];
   }
 
   registrarGasto(gasto) {
@@ -9,10 +10,15 @@ class Gastos {
       return;  
     }
     this.gastos.push(gasto);
+    sessionStorage.setItem('gastos', JSON.stringify(this.gastos));
   }
 
   obtenerGastos() {
-    return this.gastos[0];
+    return this.gastos;
+  }
+
+  calcularTotal() {
+    return this.gastos.reduce((total, gasto) => total + parseFloat(gasto.monto), 0); // Asegúrate de que monto sea numérico
   }
 }
 
