@@ -1,21 +1,22 @@
 class ObjetivoAhorro {
     constructor() {
         this.objetivosGuardados = this.obtenerObjetivosDeStorage() || [];
+        this.ERROR_CAMPOS = 'Por favor, complete todos los campos obligatorios con valores válidos.';
+        this.ERROR_EDITAR = 'No hay un objetivo establecido para editar.';
     }
 
     guardarObjetivo(monto, descripcion, fechaLimite) {
-        monto = parseFloat(parseFloat(monto).toFixed(2));
-        
-        if (!monto || isNaN(monto) || monto <= 0 || !descripcion || !fechaLimite) {
-            throw new Error('Por favor, complete todos los campos obligatorios con valores válidos.');
+        const montoNumerico = parseFloat(parseFloat(monto).toFixed(2));
+        if (!montoNumerico || isNaN(montoNumerico) || montoNumerico <= 0 || !descripcion || !fechaLimite) {
+            throw new Error(this.ERROR_CAMPOS);
         }
 
-        const nuevoObjetivo = { 
-            monto: monto.toString(),
-            descripcion, 
-            fechaLimite 
+        const nuevoObjetivo = {
+            monto: montoNumerico.toString(),
+            descripcion,
+            fechaLimite
         };
-        
+
         this.objetivosGuardados.push(nuevoObjetivo);
         sessionStorage.setItem('objetivosAhorro', JSON.stringify(this.objetivosGuardados));
         return nuevoObjetivo;
@@ -32,17 +33,16 @@ class ObjetivoAhorro {
 
     editarObjetivo(index, monto, descripcion, fechaLimite) {
         if (this.objetivosGuardados.length === 0) {
-            throw new Error('No hay un objetivo establecido para editar.');
+            throw new Error(this.ERROR_EDITAR);
         }
 
-        monto = parseFloat(parseFloat(monto).toFixed(2));
-
-        if (!monto || isNaN(monto) || monto <= 0 || !descripcion || !fechaLimite) {
-            throw new Error('Por favor, complete todos los campos con valores válidos para editar.');
+        const montoNumerico = parseFloat(parseFloat(monto).toFixed(2));
+        if (!montoNumerico || isNaN(montoNumerico) || montoNumerico <= 0 || !descripcion || !fechaLimite) {
+            throw new Error(this.ERROR_CAMPOS);
         }
 
         const objetivo = this.objetivosGuardados[index];
-        objetivo.monto = monto.toString(); 
+        objetivo.monto = montoNumerico.toString();
         objetivo.descripcion = descripcion;
         objetivo.fechaLimite = fechaLimite;
 
@@ -50,6 +50,7 @@ class ObjetivoAhorro {
         return objetivo;
     }
 }
+
 
 export default ObjetivoAhorro;
 
