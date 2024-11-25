@@ -25,6 +25,13 @@ class Gastos {
   calcularTotal() {
     return this.gastos.reduce((total, gasto) => total + parseFloat(gasto.monto), 0); // Asegúrate de que monto sea numérico
   }
+  editarGasto(index, gastoActualizado) {
+    if (!gastoActualizado.fecha || !gastoActualizado.monto) {
+      return;
+    }
+    this.gastos[index] = gastoActualizado;
+    sessionStorage.setItem('gastos', JSON.stringify(this.gastos));
+  }
 }
 
 function validarCampos(fecha, monto) {

@@ -1,56 +1,77 @@
-import {Gastos, validarCampos} from "./gastos.js"; 
+import { Gastos, validarCampos } from "./JS/RegistroGasto";
 
-// Lógica para registrar y mostrar gastos
+// Elementos de la interfaz
 const formulario = document.getElementById('gastos-form');
 const gastosDiv = document.getElementById('gastos-div');
-const gastos = new Gastos();
+const errorFechaDiv = document.getElementById('error-fecha');
+const errorMontoDiv = document.getElementById('error-monto');
 
+// Instancia de la clase Gastos
+const gastos = new Gastos();
+let indiceEdicion = null; 
+
+// Evento al enviar el formulario
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
 
   // Obtener valores del formulario
   const fecha = document.getElementById('fecha').value;
   const monto = document.getElementById('monto').value;
-  const descripcion = document.getElementById('descripcion').value || ""; 
-  const errores = validarCampos(fecha, monto);
-  const errorFechaDiv = document.getElementById('error-fecha');
-  const errorMontoDiv = document.getElementById('error-monto');
+  const descripcion = document.getElementById('descripcion').value || "";
 
+  // Validar campos
+  const errores = validarCampos(fecha, monto);
   errorFechaDiv.textContent = "";
   errorMontoDiv.textContent = "";
 
   if (errores.length > 0) {
     errores.forEach(error => {
       if (error.includes("fecha")) {
-        errorFechaDiv.textContent = error; 
+        errorFechaDiv.textContent = error;
       }
       if (error.includes("monto")) {
-        errorMontoDiv.textContent = error; 
+        errorMontoDiv.textContent = error;
       }
     });
-    return;  // Detener si hay errores
+    return; 
   }
- 
+
   const nuevoGasto = { fecha, monto, descripcion };
-  gastos.registrarGasto(nuevoGasto);
 
-  const gastoElement = document.createElement("div");
-  gastoElement.classList.add("gasto-item");
+  if (indiceEdicion !== null) {
 
-  gastoElement.innerHTML = `
-    <p>
-      Fecha: ${fecha} - Monto: ${monto} - Descripción: ${descripcion || '_ _ _'}
-      <button class="editar-gasto">Editar</button>
-    </p>
-  `;
+    gastos.editarGasto(indiceEdicion, nuevoGasto);
+    indiceEdicion = null; 
+  } else {
+    gastos.registrarGasto(nuevoGasto);
+  }
 
-  const editarButton = gastoElement.querySelector(".editar-gasto");
-  editarButton.
-  editarBut
-addEventListener("click", () => {
-    
-    con
-console.log("Editar clicado para el gasto:", nuevoGasto);
-  });
-  gastosDiv.appendChild(gastoElement);
+  formulario.reset();
+  renderizarGastos();
 });
+
+function renderizarGastos() {
+  gastosDiv.innerHTML = ""; 
+  gastos.obtenerGastos().forEach((gasto, index) => {
+    const gastoElement = document.createElement("div");
+    gastoElement.classList.add("gasto-item");
+
+    gastoElement.innerHTML = `
+      <p>
+        Fecha: ${gasto.fecha} - Monto: ${gasto.monto} - Descripción: ${gasto.descripcion || "Sin descripción"}
+        <button class="editar-gasto">Editar</button>
+      </p>
+    `;
+    const editarButton = gastoElement.querySelector(".editar-gasto");
+    editarButton.addEventListener("click", () => {
+      // Cargar los datos del gasto en el formulario
+      document.getElementById("fecha").value = gasto.fecha;
+      document.getElementById("monto").value = gasto.monto;
+      document.getElementById("descripcion").value = gasto.descripcion;
+
+      indiceEdicion = index;
+    });
+    gastosDiv.appendChild(gastoElement);
+  });
+}
+renderizarGastos();
