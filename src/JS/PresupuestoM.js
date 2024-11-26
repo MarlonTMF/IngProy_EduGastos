@@ -18,26 +18,26 @@ class Presupuesto {
         return totalBudget;
     }
 
-    setTotalBudget(amount) {
-        console.log("Intentando establecer presupuesto mensual:", amount);
-        if (amount > this.presupuestoTotalG) {
+    setTotalBudget(montodeCategoria) {
+        console.log("Intentando establecer presupuesto mensual:", montodeCategoria);
+        if (montodeCategoria > this.presupuestoTotalG) {
             alert(`El presupuesto mensual no puede exceder el total de ingresos ($${this.presupuestoTotalG})`);
             return;
         }
-        this.presupuestoMensual = amount;
-        sessionStorage.setItem('totalMonthlyBudget', amount);
+        this.presupuestoMensual = montodeCategoria;
+        sessionStorage.setItem('totalMonthlyBudget', montodeCategoria);
         console.log("Presupuesto mensual actualizado:", this.presupuestoMensual); // Verifica la actualización
     }
 
     addCategory(category) {
         // Validar la categoría antes de agregarla
         if (category.name && !this.budgets.find(cat => cat.name === category.name)) {
-            if(category.amount > this.presupuestoMensual){
+            if(category.montodeCategoria > this.presupuestoMensual){
                 alert(`No hay sficiente presupuesto mensual disponible , restante: $${this.presupuestoMensual}`);
                 return;
             }
             this.budgets.push(category); // Agregar objeto de categoría
-            this.presupuestoMensual -= category.amount;
+            this.presupuestoMensual -= category.montodeCategoria;
             sessionStorage.setItem('budgets', JSON.stringify(this.budgets));
             sessionStorage.setItem('totalMonthlyBudget',this.presupuestoMensual);
         }
@@ -61,7 +61,7 @@ editarCategoria(name, nuevoMonto) {
         return;
     }
 
-    const diferencia = nuevoMonto - categoria.amount;
+    const diferencia = nuevoMonto - categoria.montodeCategoria;
 
     // Verificar si hay suficiente presupuesto mensual disponible para el cambio
     if (this.presupuestoMensual - diferencia < 0) {
@@ -73,7 +73,7 @@ editarCategoria(name, nuevoMonto) {
     this.presupuestoMensual -= diferencia;
 
     // Actualizar el monto de la categoría
-    categoria.amount = nuevoMonto;
+    categoria.montodeCategoria = nuevoMonto;
 
     // Guardar los cambios en sessionStorage
     sessionStorage.setItem('budgets', JSON.stringify(this.budgets));

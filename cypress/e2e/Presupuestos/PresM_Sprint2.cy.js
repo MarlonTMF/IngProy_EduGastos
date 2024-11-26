@@ -56,7 +56,7 @@ describe('Validación de Presupuestos', () => {
       });
     });
   
-    it.skip('Muestra error si la categoría supera el presupuesto mensual restante', () => {
+    it('Muestra error si la categoría supera el presupuesto mensual restante', () => {
       // Configura presupuesto inicial
       cy.get('#editBudgetButton').click();
       cy.get('#totalBudgetInput').type('500');
