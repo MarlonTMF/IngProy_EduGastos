@@ -1,4 +1,4 @@
-import { Gastos } from "../gastos";
+import { Gastos } from "./RegistroGasto";
 
 beforeEach(() => {
   // Mock de sessionStorage

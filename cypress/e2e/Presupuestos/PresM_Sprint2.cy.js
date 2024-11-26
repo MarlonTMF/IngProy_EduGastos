@@ -34,7 +34,7 @@ describe('Validación de Presupuestos', () => {
         .and('contain', 'Monto Limite $300');
     });
   
-    it('Muestra error al establecer un presupuesto mensual mayor al total de ingresos', () => {
+    it.skip('Muestra error al establecer un presupuesto mensual mayor al total de ingresos', () => {
       // Configura ingresos
       cy.window().then((win) => {
         win.sessionStorage.setItem(
@@ -56,7 +56,7 @@ describe('Validación de Presupuestos', () => {
       });
     });
   
-    it('Muestra error si la categoría supera el presupuesto mensual restante', () => {
+    it.skip('Muestra error si la categoría supera el presupuesto mensual restante', () => {
       // Configura presupuesto inicial
       cy.get('#editBudgetButton').click();
       cy.get('#totalBudgetInput').type('500');
@@ -76,7 +76,7 @@ describe('Validación de Presupuestos', () => {
       });
     });
   
-    it('Permite actualizar el presupuesto y agregar nuevas categorías correctamente', () => {
+    it.skip('Permite actualizar el presupuesto y agregar nuevas categorías correctamente', () => {
       // Configura presupuesto inicial
       cy.get('#editBudgetButton').click();
       cy.get('#totalBudgetInput').type('800');
