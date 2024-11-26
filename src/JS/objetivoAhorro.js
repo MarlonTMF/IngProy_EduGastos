@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             detailsSection.style.display = 'none';
         }
-    }
+    } 
     
 
     saveBudgetButton.addEventListener('click', () => {
