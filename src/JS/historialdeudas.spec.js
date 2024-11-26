@@ -54,4 +54,29 @@ describe("Historial de deudas", () => {
       JSON.stringify([deudaRegistrada])
       );  
   });
+
+  it("debe sumar la deuda total", () => {
+    // Given -- Arrange
+    const deudas = new Deudas();
+    const deudaRegistrada = {
+    procedencia: "Universidad",
+    cantidad: 1500,
+    interes: 1,
+    cronograma: "anualmente"
+    };
+
+    const deudaRegistrada2 = {
+      procedencia: "Empresa",
+      cantidad: 2500,
+      interes: 2,
+      cronograma: "semanalmente"
+      };
+
+    // When -- Act
+    deudas.registrarDeuda(deudaRegistrada);
+    deudas.registrarDeuda(deudaRegistrada2);
+
+    // Then -- Assert
+    expect(deudas.calcularTotal()).toEqual(4000); 
+});
 });

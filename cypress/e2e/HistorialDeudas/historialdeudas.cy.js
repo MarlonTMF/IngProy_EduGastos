@@ -51,4 +51,26 @@ describe.skip("ver historial de deudas", () => {
           .and("contain", "10")
           .and("contain", "anualmente");
       });
+
+      it('se puede ver la suma total de deudas al final', () => {
+        // Introduce un gasto válido
+        cy.visit("http://localhost:1234/src/Plantillas/RegistrarDeuda.html"); // Ruta del HTML donde se registran los gastos
+        cy.get("#procedencia").type("Banco");
+        cy.get("#cantidad").type(1000);
+        cy.get("#interes").type(10);
+        cy.get("#cronograma").type("anualmente");
+        
+        cy.get("#procedencia").type("Familiar");
+        cy.get("#cantidad").type(2000);
+        cy.get("#interes").type(10);
+        cy.get("#cronograma").type("mensual");
+        // When -- Act
+        cy.get("#registrar-deuda-button").click();
+    
+        // Then -- Assert
+        // Ahora visita el historial donde se muestran los gastos registrados
+        cy.visit("http://localhost:1234/src/Plantillas/historialdeudas.html"); // Ruta del historial de gastos
+        cy.get("#total-deudas")
+          .should("contain", "3000");
+      });
 });
