@@ -7,8 +7,10 @@ const descripcionIngreso = document.querySelector("#descripcion-ingreso");
 const formIngreso = document.querySelector("#ingresos-form");
 const ingresosDiv = document.querySelector("#ingresos-div");
 
-// Crear instancia de Ingresos
+// Crear instancias
 const ingresos = new Ingresos();
+const presupuesto = new Presupuesto(ingresos);
+const gastos = new Gastos(presupuesto);
 
 // Función para renderizar los ingresos en el DOM
 function renderIngresos() {
