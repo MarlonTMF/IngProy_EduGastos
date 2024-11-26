@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivo de Ahorro</title>
+    <link rel="stylesheet" href="../Styles/style_Pres.css">
+</head>
+<body>
+
+    <header>
+        <h1>Registrar Objetivo de Ahorro</h1>
+    </header>
+
+    <main>
+        <form id="ahorroForm">
+            <div>
+                <label for="monto">Monto:</label>
+                <input type="number" id="totalBudgetInput" placeholder="Ingrese el monto" required>
+            </div>
+            <div>
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" placeholder="Descripción del objetivo" required>
+            </div>
+            <div>
+                <label for="fechaLimite">Fecha límite:</label>
+                <input type="date" id="fechaLimite" required>
+            </div>
+            <div>
+                <button type="button" id="guardarObjetivo">Guardar Objetivo</button>
+                <button type="button" id="editarObjetivo" style="display: none;">Editar Objetivo</button>
+            </div>
+        </form>
+
+        <section id="detallesObjetivo" style="display: none;">
+            <h2>Detalles del Objetivo</h2>
+            <div id="objetivosContainer"></div>
+        </section>
+    </main>
+
+    <script type="module" src="../JS/objetivoAhorro.js"></script>
+</body>
+</html>

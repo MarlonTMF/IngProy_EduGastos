@@ -1,14 +1,24 @@
-import { Gastos, validarCampos } from "./JS/RegistroGasto";
+import {Gastos, validarCampos} from "./gastos.js"; 
+import { Presupuesto } from "./JS/PresupuestoM.js";
+import Ingresos from "./JS/ingresos.js";
+
+
+// Crear instancias
+const presupuesto = new Presupuesto(new Ingresos());
+const gastos = new Gastos(presupuesto);
 
 // Elementos de la interfaz
 const formulario = document.getElementById('gastos-form');
 const gastosDiv = document.getElementById('gastos-div');
-const errorFechaDiv = document.getElementById('error-fecha');
-const errorMontoDiv = document.getElementById('error-monto');
+const categorySelect = document.getElementById('categoria');
 
-// Instancia de la clase Gastos
-const gastos = new Gastos();
-let indiceEdicion = null; 
+function renderCategoriesDropdown(){
+  const categories = presupuesto.getCategories();
+  categorySelect.innerHTML = '<option value="">Seleccione una categoría</option>'
+  categories.forEach(cat=> {
+    categorySelect.innerHTML += `<option value="${cat.name}">${cat.name}</option>`;
+  });
+}
 
 // Evento al enviar el formulario
 formulario.addEventListener('submit', (event) => {
@@ -17,9 +27,9 @@ formulario.addEventListener('submit', (event) => {
   // Obtener valores del formulario
   const fecha = document.getElementById('fecha').value;
   const monto = document.getElementById('monto').value;
-  const descripcion = document.getElementById('descripcion').value || "";
-
-  // Validar campos
+  const descripcion = document.getElementById('descripcion').value || ""; 
+  const categoria = categorySelect.value;
+  
   const errores = validarCampos(fecha, monto);
   errorFechaDiv.textContent = "";
   errorMontoDiv.textContent = "";
@@ -35,55 +45,21 @@ formulario.addEventListener('submit', (event) => {
     });
     return; 
   }
+  // Registrar gasto
 
-  const nuevoGasto = { fecha, monto, descripcion };
-
-  if (indiceEdicion !== null) {
-    const erroresEdicion = validarCampos(nuevoGasto.fecha, nuevoGasto.monto);
-        if (erroresEdicion.length > 0) {
-          return;
-        }
-    gastos.editarGasto(indiceEdicion, nuevoGasto);
-    indiceEdicion = null; 
-  } else {
-    gastos.registrarGasto(nuevoGasto);
+  if(!categoria){
+    alert("Debe seleccionar una categoría.");
+    return;
   }
 
+  const nuevoGasto = { fecha, monto, descripcion, categoria };
+  gastos.registrarGasto(nuevoGasto);
+
+  // Mostrar el gasto en la página
+  gastosDiv.innerHTML += `<p>Fecha: ${fecha} - Monto: $${monto} - Categoría: ${categoria} - Descripción: ${descripcion || 'Sin descripción'}</p>`;
   formulario.reset();
-  renderizarGastos();
+  renderCategoriesDropdown(); // Actualiza el desplegable
+
 });
 
-function renderizarGastos() {
-  gastosDiv.innerHTML = ""; 
-  gastos.obtenerGastos().forEach((gasto, index) => {
-    const gastoElement = document.createElement("div");
-    gastoElement.classList.add("gasto-item");
-
-    gastoElement.innerHTML = `
-      <p>
-        Fecha: ${gasto.fecha} - Monto: ${gasto.monto} - Descripción: ${gasto.descripcion || "_ _ _"}
-        <button class="editar-gasto">Editar</button>
-        <button class="eliminar-gasto">Eliminar</button>
-      </p>
-    `;
-    const editarButton = gastoElement.querySelector(".editar-gasto");
-    editarButton.addEventListener("click", () => {
-      // Cargar los datos del gasto en el formulario
-      document.getElementById("fecha").value = gasto.fecha;
-      document.getElementById("monto").value = gasto.monto;
-      document.getElementById("descripcion").value = gasto.descripcion;
-
-      indiceEdicion = index;
-    });
-    const eliminarButton = gastoElement.querySelector(".eliminar-gasto");
-    eliminarButton.addEventListener("click", () => {
-      const confirmacion = window.confirm("¿Estás seguro de que deseas eliminar este gasto?");
-      if (confirmacion) {
-        gastos.eliminarGasto(index); 
-        renderizarGastos(); 
-      }
-    });
-    gastosDiv.appendChild(gastoElement);
-  });
-}
-renderizarGastos();
+renderCategoriesDropdown();

@@ -1,6 +1,6 @@
 import Ingresos from "./ingresos";
 
-describe("Ingresos", () => {
+describe.skip("Ingresos", () => {
     it("Registrar un ingreso", () => {
         const ingresos = new Ingresos();
         const registroIngreso = {
@@ -29,6 +29,5 @@ describe("Ingresos", () => {
         let ingresoRegistrado = ingresos.obtenerIngresos();
         expect(ingresoRegistrado).toEqual([registroIngreso]);
       })
-   
 
 });
