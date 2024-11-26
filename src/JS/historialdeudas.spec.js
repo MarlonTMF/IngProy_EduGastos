@@ -32,4 +32,26 @@ describe("Historial de deudas", () => {
         JSON.stringify([deudaRegistrada])
         );  
     });
+
+    it("debe registrar una deuda y opcionalmente su cronograma", () => {
+      // Given -- Arrange
+      const deudas = new Deudas();
+      const deudaRegistrada = {
+      procedencia: "Universidad",
+      cantidad: 1500,
+      interes: 1,
+      cronograma: "anualmente"
+      };
+
+      // When -- Act
+      deudas.registrarDeuda(deudaRegistrada);
+
+      // Then -- Assert
+      const deudasRegistradas = deudas.getDeudas();
+      expect(deudasRegistradas).toEqual([deudaRegistrada]);
+      expect(sessionStorage.setItem).toHaveBeenCalledWith(
+      "deudas",
+      JSON.stringify([deudaRegistrada])
+      );  
+  });
 });
