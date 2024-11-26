@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xml:lang="es">
+<head>
+  <title>Historial de Deudas</title>
+  <link rel="stylesheet" href="../Styles/style_Hi.css">
+</head>
+<body>
+  <h1>Historial de Deudas</h1>
+  <div id="historial-deudas-div"></div>
+  <div id="total-deudas-div">Total de deudas: <span id="total-deudas"></span></div>
+
+  <form id="form-registrar-deuda">
+    <label for="procedencia">Procedencia:</label>
+    <input type="text" id="procedencia" name="procedencia" required>
+    
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+
+    <label for="interes">Interés:</label>
+    <input type="number" id="interes" name="interes" step="0.01" required>
+
+    <button type="submit" id="registrar-deuda-button">Registrar Deuda</button>
+    <p id="mensaje-error" style="color: red; display: none;"></p>
+  </form>
+
+  <script type="module" src="../JS/presenterhistorialdeudas.js"></script>
+  <a href="../../index.html">Volver al registro principal</a>
+</body>
+</html>
