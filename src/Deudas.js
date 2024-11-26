@@ -8,9 +8,10 @@ class Deudas {
       if (!deuda.procedencia || !deuda.cantidad || !deuda.interes) {
         return;
       }
+      deuda.cronograma = deuda.cronograma || "No especificado"; // Asignar valor predeterminado si está vacío
       this.deudas.push(deuda);
       sessionStorage.setItem("deudas", JSON.stringify(this.deudas));
-    }
+    } 
   
     getDeudas() {
       return this.deudas;

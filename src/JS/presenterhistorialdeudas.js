@@ -11,38 +11,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const deudasRegistradas = deudas.getDeudas();
   deudasRegistradas.forEach((deuda) => {
     const deudaElemento = document.createElement("div");
-    deudaElemento.textContent = `${deuda.procedencia} - ${deuda.cantidad} - ${deuda.interes}%`;
+    deudaElemento.textContent = `${deuda.procedencia} - ${deuda.cantidad} - ${deuda.interes}% - ${deuda.cronograma}`;
     historialDiv.appendChild(deudaElemento);
   });
 
   // Calcular el total y mostrarlo
-  totalDeudasSpan.textContent = deudasRegistradas.reduce((total, deuda) => total + parseFloat(deuda.cantidad), 0);
+  totalDeudasSpan.textContent = deudas.calcularTotal();
 
   // Registrar nuevas deudas
   formRegistrarDeuda.addEventListener("submit", (e) => {
     e.preventDefault();
-
+  
     const procedencia = document.getElementById("procedencia").value;
     const cantidad = parseFloat(document.getElementById("cantidad").value);
     const interes = parseFloat(document.getElementById("interes").value);
-
+    const cronograma = document.getElementById("cronograma").value || "No especificado"; // Permitir vacío
+  
     if (!procedencia || isNaN(cantidad) || isNaN(interes)) {
-      mensajeError.textContent = "Todos los campos son obligatorios.";
+      mensajeError.textContent = "Procedencia, cantidad e interés son obligatorios.";
       mensajeError.style.display = "block";
       return;
     }
-
+  
     mensajeError.style.display = "none";
-
-    const nuevaDeuda = { procedencia, cantidad, interes };
+  
+    const nuevaDeuda = { procedencia, cantidad, interes, cronograma };
     deudas.registrarDeuda(nuevaDeuda);
-
+  
     // Actualizar la lista y el total
     const deudaElemento = document.createElement("div");
-    deudaElemento.textContent = `${procedencia} - ${cantidad} - ${interes}%`;
+    deudaElemento.textContent = `${procedencia} - ${cantidad} - ${interes}% - ${cronograma}`;
     historialDiv.appendChild(deudaElemento);
-    totalDeudasSpan.textContent = deudas.getDeudas().reduce((total, deuda) => total + parseFloat(deuda.cantidad), 0);
-
+    totalDeudasSpan.textContent = deudas.calcularTotal();
+  
     formRegistrarDeuda.reset();
   });
+  
 });
