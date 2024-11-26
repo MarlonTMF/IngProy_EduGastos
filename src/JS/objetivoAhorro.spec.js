@@ -7,8 +7,14 @@ describe("ObjetivoAhorro (Parte 1)", () => {
     let objetivoAhorro;
 
     beforeEach(() => {
-        sessionStorage.clear();
-        objetivoAhorro = new ObjetivoAhorro();
+        global.sessionStorage = {
+            getItem: jest.fn(),
+            setItem: jest.fn(),
+            clear: jest.fn()
+        };
+        objetivoAhorro = new ObjetivoAhorro(); // Inicializa la instancia aquí
+    });
+    
     });
     const crearObjetivo = (monto, descripcion, fechaLimite) => {
         return objetivoAhorro.guardarObjetivo(monto, descripcion, fechaLimite);
@@ -26,7 +32,7 @@ describe("ObjetivoAhorro (Parte 1)", () => {
             fechaLimite: '2024-12-31'
         });
         expect(objetivoAhorro.obtenerObjetivosDeStorage()).toEqual([objetivo]);
-    }); 
+    });
 
     it("Debería permitir editar el objetivo de ahorro correctamente", () => {
         const original = crearObjetivo('1000', 'Vacaciones', '2024-12-31');
@@ -58,7 +64,7 @@ describe("ObjetivoAhorro (Parte 1)", () => {
         expect(resultado).toEqual(objetivoEditado);
     });
 
-    it("Debería renderizar los objetivos guardados correctamente", () => {
+    it("Debería renderizar los objetivos guuardados correctamente", () => {
         const objetivo1 = { monto: '1000', descripcion: 'Ahorro para vacaciones', fechaLimite: '2024-12-31' };
         const objetivo2 = { monto: '2000', descripcion: 'Ahorro para coche', fechaLimite: '2025-01-31' };
 
@@ -70,6 +76,3 @@ describe("ObjetivoAhorro (Parte 1)", () => {
         expect(objetivos[0]).toEqual(objetivo1);
         expect(objetivos[1]).toEqual(objetivo2);
     });
-
-    
-});

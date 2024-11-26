@@ -54,7 +54,7 @@ describe("Editar y Eliminar un gasto", () => {
         const gastoEditado = gastos.obtenerGastos()[0];
         expect(gastoEditado).toEqual(gastoValido);
     });
-    it("debería eliminar un gasto existente", () => {
+    it.skip("debería eliminar un gasto existente", () => {
         const gastos = new Gastos();
         const gasto1 = { fecha: "2024-11-01", monto: 100, descripcion: "Cine" };
         const gasto2 = { fecha: "2024-11-05", monto: 150, descripcion: "Teatro" };

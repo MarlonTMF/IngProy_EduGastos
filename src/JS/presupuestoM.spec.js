@@ -1,7 +1,12 @@
 import { Presupuesto } from './PresupuestoM.js';
+import Ingresos from './ingresos';
 
-describe.skip("Presupuesto", () => {
+describe("Presupuesto", () => {
+    let ingresosMock;
+
     beforeEach(() => {
+        global.alert = jest.fn(); // Simula la función alert
+
         // Mock de sessionStorage con contenedor en memoria
         global.sessionStorage = (() => {
             let store = {};
@@ -16,80 +21,96 @@ describe.skip("Presupuesto", () => {
             };
         })();
 
-        // Limpiar el "almacenamiento" de sessionStorage antes de cada prueba
-        sessionStorage.clear();
+        // Mock de ingresos
+        ingresosMock = {
+            obtenerIngresos: jest.fn(() => [
+                { fuente: 'Salario', monto: 2000 },
+                { fuente: 'Freelance', monto: 500 }
+            ]),
+            obtenerTotalIngresos: jest.fn(() => 2500)
+        };
+
+        sessionStorage.clear(); // Limpiar sessionStorage antes de cada prueba
     });
 
-    it("Debería establecer y obtener el presupuesto total correctamente", () => {
-        const presupuesto = new Presupuesto();
+    it("Debería inicializar correctamente con el total de ingresos y categorías guardadas", () => {
+        // Mockear sessionStorage para obtener datos previos
+        sessionStorage.setItem('budgets', JSON.stringify([])); // No hay categorías guardadas
+
+        const presupuesto = new Presupuesto(ingresosMock);
+
+        // Comprobar valores iniciales
+        expect(presupuesto.getPresupuestoTotalGlobal()).toBe(2500); // El total de ingresos debe ser 2500
+        expect(presupuesto.getCategories()).toEqual([]); // No hay categorías guardadas
+        expect(presupuesto.getPresupuestoMensualRestante()).toBe(0); // No se ha establecido aún un presupuesto mensual
+    });
+
+    it("Debería establecer y obtener el presupuesto mensual correctamente", () => {
+        const presupuesto = new Presupuesto(ingresosMock);
         const amount = 1500;
 
-        // Establecer el presupuesto
+        // Establecer presupuesto mensual
         presupuesto.setTotalBudget(amount);
 
-        // Obtener el presupuesto
-        const totalBudget = presupuesto.getTotalBudget();
-
-        // Verificar que el presupuesto sea el esperado
-        expect(totalBudget).toBe(amount);
+        // Verificar si el presupuesto mensual se actualizó correctamente
+        expect(presupuesto.getPresupuestoMensualRestante()).toBe(amount);
+        expect(sessionStorage.setItem).toHaveBeenCalledWith('totalMonthlyBudget', amount);
     });
 
-    it("Debería retornar 0 si no hay presupuesto establecido", () => {
-        const presupuesto = new Presupuesto();
+    it("No debería permitir establecer un presupuesto mensual mayor al total global", () => {
+        const presupuesto = new Presupuesto(ingresosMock);
 
-        // Obtener el presupuesto sin haberlo establecido
-        const totalBudget = presupuesto.getTotalBudget();
+        // Intentar establecer un presupuesto mayor al total global
+        presupuesto.setTotalBudget(3000); // Mayor que el total global
 
-        // Verificar que el presupuesto sea 0
-        expect(totalBudget).toBe(0);
+        // Verificar que el presupuesto no cambió
+        expect(presupuesto.getPresupuestoMensualRestante()).toBe(0); // No debe actualizarse
+        expect(global.alert).toHaveBeenCalledWith("El presupuesto mensual no puede exceder el total de ingresos ($2500)");
     });
 
-    it("addCategory debería agregar una nueva categoría a la lista", () => {
-        const presupuesto = new Presupuesto();
-        presupuesto.addCategory({ name: 'Comida', amount: 300 }); // Cambiar a objeto
+    it("Debería retornar una lista vacía si no hay categorías", () => {
+        const presupuesto = new Presupuesto(ingresosMock);
 
         const categories = presupuesto.getCategories();
 
-        // Verificar que la categoría 'Comida' esté presente
-        expect(categories).toEqual([{ name: 'Comida', amount: 300 }]); // Cambiar para verificar el objeto completo
-    });
-
-    it("addCategory no debería agregar una categoría duplicada", () => {
-        const presupuesto = new Presupuesto();
-        presupuesto.addCategory({ name: 'Comida', amount: 300 });
-        presupuesto.addCategory({ name: 'Comida', amount: 300 }); // Intentar agregar la misma categoría nuevamente
-
-        const categories = presupuesto.getCategories();
-
-        // Verificar que solo haya una instancia de 'Comida'
-        expect(categories.length).toBe(1);
-    });
-
-    it("getCategories debería retornar una lista vacía si no hay categorías", () => {
-        const presupuesto = new Presupuesto();
-
-        const categories = presupuesto.getCategories();
-
-        // Verificar que la lista esté vacía
+        // Verificar que la lista de categorías es vacía
         expect(categories).toEqual([]);
     });
 
-    it("addCategory debería agregar varias categorías con sus montos respectivos", () => {
-        const presupuesto = new Presupuesto();
+    it("Debería agregar una categoría y actualizar el presupuesto mensual correctamente", () => {
+        const presupuesto = new Presupuesto(ingresosMock);
+        const categoria = { name: 'Alimentos', amount: 1000 };
 
-        // Agregar varias categorías
-        presupuesto.addCategory({ name: 'Comida', amount: 300 });
-        presupuesto.addCategory({ name: 'Transporte', amount: 150 });
-        presupuesto.addCategory({ name: 'Entretenimiento', amount: 100 });
+        // Establecer presupuesto mensual antes de agregar la categoría
+        presupuesto.setTotalBudget(2000);
 
-        const categories = presupuesto.getCategories();
+        // Agregar categoría
+        presupuesto.addCategory(categoria);
 
-        // Verificar que todas las categorías estén presentes
-        expect(categories).toEqual([
-            { name: 'Comida', amount: 300 },
-            { name: 'Transporte', amount: 150 },
-            { name: 'Entretenimiento', amount: 100 },
-        ]);
+        // Verificar si la categoría fue agregada
+        expect(presupuesto.getCategories()).toContain(categoria);
+
+        // Verificar si el presupuesto mensual restante se actualizó correctamente
+        expect(presupuesto.getPresupuestoMensualRestante()).toBe(1000); // 2000 - 1000 = 1000
+
+        // Verificar que se guardaron las categorías en sessionStorage
+        expect(sessionStorage.setItem).toHaveBeenCalledWith('budgets', JSON.stringify([categoria]));
     });
-    
+
+    it.skip("No debería permitir agregar una categoría si el monto excede el presupuesto mensual", () => {
+        const presupuesto = new Presupuesto(ingresosMock);
+        const categoria = { name: 'Alimentos', amount: 3000 };
+
+        // Establecer presupuesto mensual antes de agregar la categoría
+        presupuesto.setTotalBudget(2000);
+
+        // Intentar agregar una categoría con un monto mayor al presupuesto mensual
+        presupuesto.addCategory(categoria);
+
+        // Verificar que no se ha agregado la categoría
+        expect(presupuesto.getCategories()).not.toContain(categoria);
+
+        // Verificar que se muestra una alerta
+        expect(global.alert).toHaveBeenCalledWith("No hay suficiente presupuesto mensual disponible , restante: $2000");
+    });
 });

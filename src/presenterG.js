@@ -1,5 +1,18 @@
 import Ingresos from "./JS/ingresos";
+import { Presupuesto } from "./JS/PresupuestoM";
 
+
+
+// Crear instancia de Ingresos primero
+const ingreso = new Ingresos();
+
+// Luego, crear instancia de Presupuesto pasando la instancia de ingresos
+const presupuesto = new Presupuesto(ingreso);
+
+// Hacer accesible globalmente para pruebas
+window.presupuesto = presupuesto;
+
+console.log("Presupuesto inicializado y asignado a window:", presupuesto);
 // Selección de elementos del DOM
 const fechaIngreso = document.querySelector("#fecha-ingreso");
 const montoIngreso = document.querySelector("#monto-ingreso");
@@ -7,10 +20,8 @@ const descripcionIngreso = document.querySelector("#descripcion-ingreso");
 const formIngreso = document.querySelector("#ingresos-form");
 const ingresosDiv = document.querySelector("#ingresos-div");
 
-// Crear instancias
+// Crear instancia de Ingresos
 const ingresos = new Ingresos();
-const presupuesto = new Presupuesto(ingresos);
-const gastos = new Gastos(presupuesto);
 
 // Función para renderizar los ingresos en el DOM
 function renderIngresos() {

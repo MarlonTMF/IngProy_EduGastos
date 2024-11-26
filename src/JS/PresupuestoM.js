@@ -9,6 +9,7 @@ class Presupuesto {
         this.presupuestoTotalG = ingresosInstance.obtenerTotalIngresos();
         console.log("Presupuesto total global:", this.presupuestoTotalG); // Verifica el presupuesto global
         this.presupuestoMensual = this.getTotalBudget();
+
     }
 
     getTotalBudget() {
@@ -35,8 +36,7 @@ class Presupuesto {
                 alert(`No hay sficiente presupuesto mensual disponible , restante: $${this.presupuestoMensual}`);
                 return;
             }
-            category.gastado = 0;
-            this.budgets.push(category); 
+            this.budgets.push(category); // Agregar objeto de categoría
             this.presupuestoMensual -= category.amount;
             sessionStorage.setItem('budgets', JSON.stringify(this.budgets));
             sessionStorage.setItem('totalMonthlyBudget',this.presupuestoMensual);
@@ -46,10 +46,6 @@ class Presupuesto {
     getCategories() {
         return this.budgets;
     }
-    getGastoCategoria() {
-        
-        return this.budgets.gastado;
-    }
 
     getPresupuestoTotalGlobal(){
         return this.presupuestoTotalG;
@@ -58,8 +54,35 @@ class Presupuesto {
         return this.presupuestoMensual;
     }
 
+editarCategoria(name, nuevoMonto) {
+    const categoria = this.budgets.find(cat => cat.name === name);
+    if (!categoria) {
+        alert(`La categoría '${name}' no existe.`);
+        return;
+    }
+
+    const diferencia = nuevoMonto - categoria.amount;
+
+    // Verificar si hay suficiente presupuesto mensual disponible para el cambio
+    if (this.presupuestoMensual - diferencia < 0) {
+        alert(`No hay suficiente presupuesto mensual disponible para actualizar la categoría '${name}'.`);
+        return;
+    }
+
+    // Actualizar el presupuesto mensual restante
+    this.presupuestoMensual -= diferencia;
+
+    // Actualizar el monto de la categoría
+    categoria.amount = nuevoMonto;
+
+    // Guardar los cambios en sessionStorage
+    sessionStorage.setItem('budgets', JSON.stringify(this.budgets));
+    sessionStorage.setItem('totalMonthlyBudget', this.presupuestoMensual);
+
+    console.log(`Categoría '${name}' actualizada con éxito. Nuevo monto: $${nuevoMonto}`);
 }
 
+}
 // Función de validación para categorías
 function validarCategoria(name) {
     const errores = [];
