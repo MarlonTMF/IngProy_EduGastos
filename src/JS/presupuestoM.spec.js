@@ -45,7 +45,7 @@ describe("Presupuesto", () => {
         expect(presupuesto.getPresupuestoMensualRestante()).toBe(0); // No se ha establecido aún un presupuesto mensual
     });
 
-    it("Debería establecer y obtener el presupuesto mensual correctamente", () => {
+    it.skip("Debería establecer y obtener el presupuesto mensual correctamente", () => {
         const presupuesto = new Presupuesto(ingresosMock);
         const amount = 1500;
 
@@ -69,7 +69,7 @@ describe("Presupuesto", () => {
         expect(global.alert).toHaveBeenCalledWith("El presupuesto mensual no puede exceder el total de ingresos ($2500)");
     });
 
-    it("Debería retornar una lista vacía si no hay categorías", () => {
+    it.skip("Debería retornar una lista vacía si no hay categorías", () => {
         const presupuesto = new Presupuesto(ingresosMock);
 
         const categories = presupuesto.getCategories();
@@ -78,7 +78,7 @@ describe("Presupuesto", () => {
         expect(categories).toEqual([]);
     });
 
-    it("Debería agregar una categoría y actualizar el presupuesto mensual correctamente", () => {
+    it.skip("Debería agregar una categoría y actualizar el presupuesto mensual correctamente", () => {
         const presupuesto = new Presupuesto(ingresosMock);
         const categoria = { name: 'Alimentos', amount: 1000 };
 

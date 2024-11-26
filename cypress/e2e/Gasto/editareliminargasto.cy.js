@@ -98,7 +98,6 @@ describe("Botón Editar junto a cada gasto", () => {
         // Verifica que el botón "Eliminar" esté presente
         cy.contains("Eliminar").should("exist");
       });
-
     it("debería eliminar un gasto al confirmar la acción", () => {
       // Registrar un gasto inicial
       cy.get("#fecha").type("2024-11-01");
@@ -160,3 +159,5 @@ describe("Botón Editar junto a cada gasto", () => {
 //     cy.get("#categoria").select("Entretenimiento"); // Asegúrate de que la categoría esté seleccionada
 //     cy.get("#registrar-gasto-button").click();
 // 
+
+
