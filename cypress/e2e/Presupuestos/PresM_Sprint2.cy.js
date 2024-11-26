@@ -34,7 +34,7 @@ describe('Validación de Presupuestos', () => {
         .and('contain', 'Monto Limite $300');
     });
   
-    it.skip('Muestra error al establecer un presupuesto mensual mayor al total de ingresos', () => {
+    it('Muestra error al establecer un presupuesto mensual mayor al total de ingresos', () => {
       // Configura ingresos
       cy.window().then((win) => {
         win.sessionStorage.setItem(
