@@ -45,7 +45,7 @@ describe("Presupuesto", () => {
         expect(presupuesto.getPresupuestoMensualRestante()).toBe(0); // No se ha establecido aún un presupuesto mensual
     });
 
-    it.skip("Debería establecer y obtener el presupuesto mensual correctamente", () => {
+    it("Debería establecer y obtener el presupuesto mensual correctamente", () => {
         const presupuesto = new Presupuesto(ingresosMock);
         const amount = 1500;
 
