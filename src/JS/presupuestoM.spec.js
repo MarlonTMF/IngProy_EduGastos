@@ -58,7 +58,7 @@ describe("Presupuesto", () => {
     });
 
     // 22222222222 ###############
-    it.skip("No debería permitir establecer un presupuesto mensual mayor al total global", () => {
+    it("No debería permitir establecer un presupuesto mensual mayor al total global", () => {
         const presupuesto = new Presupuesto(ingresosMock);
 
         // Intentar establecer un presupuesto mayor al total global
